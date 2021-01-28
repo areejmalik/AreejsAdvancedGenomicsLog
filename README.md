@@ -102,5 +102,64 @@ including the results of the script?
 git add README.md
 git commit -m 'updating readme'
 git push -u origin main
-
 ```
+
+##Day 02 27-Jan-2021
+* Homework day02
+```sh
+#1 - Write an sbatch script to cp the files /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/originalfastqs/ into your own data directory
+   Kristina-HADB01
+   Ivan-HADB02
+   KatieP-HADB03
+   KatieC-HADB04
+   Stephanie-HADB05
+   Areej-HADB06
+   Andrew-HADB01
+   John-HADB02
+   dan-All
+   
+[amali010@coreV2-25-072 data]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data
+
+#2 - Add the content of your sbatch script to your logfile
+[amali010@coreV2-25-072 data]$ cat AMCopyLane06.sh
+#!/bin/bash -l
+
+#SBATCH -o AMCopyLane06.txt
+#SBATCH -n 1
+#SBATCH --mail-user=amali010@odu.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=AMCopyLane06
+
+cp /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/originalfastqs/HADB06*.fastq.gz /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data
+
+#3 - Submit the slurm script (sbatch scripname.sh) and verify 
+that it's working (by squeue -u yourusername multiple times and 
+checking the destination directory to make sure the files are being created)
+[amali010@coreV2-25-072 data]$ sbatch AMCopyLane06.sh
+Submitted batch job 9270443
+
+#4 - Make sure this is all documented on your github notebook
+Done
+
+#5 - Write a sbatch script to gunzip all the fastq.gz files
+[amali010@coreV2-25-072 data]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data
+[amali010@coreV2-25-072 data]$ cat AMGunzipLane06.sh
+#!/bin/bash -l
+
+#SBATCH -o AMGunzipLane06.txt
+#SBATCH -n 1
+#SBATCH --mail-user=amali010@odu.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=AMGunzipLane06
+
+gunzip *.fastq.gz
+
+[amali010@coreV2-25-072 data]$ sbatch AMGunzipLane06.sh
+Submitted batch job 9270466
+
+#6 - Push your notebook file to your github page
+git add README.md
+git commit -m 'updating readme'
+git push -u origin main
