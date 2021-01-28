@@ -322,6 +322,60 @@ Submitted batch job 9270936
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
 
 #7 - Make sure this is all documented on your github page
+areej@DESKTOP-RF6VF4N MINGW64 ~/Desktop/BIOL_803_Advanced_Genomics_Data_Analysis/In_class/21sp_advgenomics/AreejsAdvancedGenomicsLog (main)
+$ git add README.md
 
+areej@DESKTOP-RF6VF4N MINGW64 ~/Desktop/BIOL_803_Advanced_Genomics_Data_Analysis/In_class/21sp_advgenomics/AreejsAdvancedGenomicsLog (main)
+$ git commit -m 'updating readme'
+[main 4326621] updating readme
+ 1 file changed, 20 insertions(+), 1 deletion(-)
 
-#8 - 
+areej@DESKTOP-RF6VF4N MINGW64 ~/Desktop/BIOL_803_Advanced_Genomics_Data_Analysis/In_class/21sp_advgenomics/AreejsAdvancedGenomicsLog (main)
+$ git push -u origin main
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 491 bytes | 245.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/areejmalik/AreejsAdvancedGenomicsLog.git
+   aa0237a..4326621  main -> main
+Branch 'main' set up to track remote branch 'main' from 'origin'.
+
+#8 - The naming convention for the files is as follows:
+	SOURCEPOPULATION_SYMBIOTICSTATE_GENOTYPE_TEMPERATURE.fastq
+	There are 2 sources: Virginia and Rhode Island
+	There are 2 symbiotic states: Brown and White
+	
+#9 - Next, you're going to start the process of adapter clipping and quality trimming all the renamed .fastq files in batches, by lane
+
+#10 - cp the script /cm/shared/courses/dbarshis/21AdvGenomics/scripts/Trimclipfilterstatsbatch_advbioinf.py into your scripts directory
+[amali010@coreV1-22-016 data]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data
+[amali010@coreV1-22-016 data]$ cp /cm/shared/courses/dbarshis/21AdvGenomics/scripts/
+
+#11 - Less/head the new script and check out the usage statement
+[amali010@coreV1-22-016 data]$ head -14 ../scripts/Trimclipfilterstatsbatch_advbioinf.py
+#!/usr/bin/env python
+# Written by Dan Barshis
+
+import sys, os
+
+########### Usage #############
+# Trimclipfilterstatsbatch.py barcodefile.txt anynumberoffastqfiles
+# This should be run from within the folder with all of your original .fastqstrim
+# Will quality trim multiple SINGLE-END fastq files
+# Things to customize for your particular platform:
+# qualoffset = 33 Quality score offset
+# -t option in qualitytrim (the lower threshold quality score for trimming)
+# -l option in qualitytrim and adapterclip (the length threshold for throwing out short reads)
+
+#12 - cp the /cm/shared/courses/dbarshis/21AdvGenomics/assignments_exercises/day03/adapterlist_advbioinf.txt into the working directory with your fastq files
+[amali010@turing1 fastq]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq
+[amali010@turing1 fastq]$ cp /cm/shared/courses/dbarshis/21AdvGenomics/assignments_exercises/day03/adapterlist_advbioinf.txt ./
+
+#13 - Make a sbatch script for the Trimclipfilter... script and run it on your fastq files
+
+```
