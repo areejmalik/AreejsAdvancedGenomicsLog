@@ -296,11 +296,30 @@ mv HADB06-P_S112_L007_R1_001.fastq RI_B_07_18.fastq
 
 #5 - Uncomment the last line of the renaming script in your scripts folder that starts with os.popen and comment 
 out the next to last line that starts with print
-
+[amali010@turing1 fastq]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq
+[amali010@turing1 fastq]$ nano ../../scripts/renamer_advbioinf.py
 
 #6 - write a sbatch script and submit it to rename all the .fastq files according to the renaming table using 
 your renamer_advbioinf.py script
+[amali010@turing1 fastq]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq
+[amali010@turing1 fastq]$ nano areejsrenamer.sh
+[amali010@turing1 fastq]$ cat areejsrenamer.sh
+#!/bin/bash -l
 
+#SBATCH -o areejsrenamer.txt
+#SBATCH -n 1
+#SBATCH --mail-user=amali010@odu.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=FastqRename
+
+../../scripts/renamer_advbioinf.py renamingtable_complete.txt
+
+[amali010@turing1 fastq]$ sbatch ./areejsrenamer.sh
+Submitted batch job 9270936
+[amali010@turing1 fastq]$ squeue -u amali010
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
 
 #7 - Make sure this is all documented on your github page
 
