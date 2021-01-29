@@ -128,7 +128,7 @@ git push -u origin main
 ##Day 03 27-Jan-2021
 * Homework day02 (originally meant for 22-Jan-2021 but done on 27-Jan-2021)
 ```sh
-#1 - Write an sbatch script to cp the files /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/originalfastqs/ into your own data directory
+#1 - write an sbatch script to cp the files /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/originalfastqs/ into your own data directory
    Kristina-HADB01
    Ivan-HADB02
    KatieP-HADB03
@@ -142,7 +142,7 @@ git push -u origin main
 [amali010@coreV2-25-072 data]$ pwd
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data
 
-#2 - Add the content of your sbatch script to your logfile
+#2 - add the content of your sbatch script to your logfile
 [amali010@coreV2-25-072 data]$ cat AMCopyLane06.sh
 #!/bin/bash -l
 
@@ -154,16 +154,16 @@ git push -u origin main
 
 cp /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/originalfastqs/HADB06*.fastq.gz /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data
 
-#3 - Submit the slurm script (sbatch scripname.sh) and verify 
+#3 - submit the slurm script (sbatch scripname.sh) and verify 
 that it's working (by squeue -u yourusername multiple times and 
 checking the destination directory to make sure the files are being created)
 [amali010@coreV2-25-072 data]$ sbatch AMCopyLane06.sh
 Submitted batch job 9270443
 
-#4 - Make sure this is all documented on your github notebook
+#4 - make sure this is all documented on your github notebook
 Done
 
-#5 - Write a sbatch script to gunzip all the fastq.gz files
+#5 - write a sbatch script to gunzip all the fastq.gz files
 [amali010@coreV2-25-072 data]$ pwd
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data
 [amali010@coreV2-25-072 data]$ cat AMGunzipLane06.sh
@@ -180,7 +180,7 @@ gunzip *.fastq.gz
 [amali010@coreV2-25-072 data]$ sbatch AMGunzipLane06.sh
 Submitted batch job 9270466
 
-#6 - Push your notebook file to your github page
+#6 - push your notebook file to your github page
 git add README.md
 git commit -m 'updating readme'
 git push -u origin main
@@ -315,7 +315,7 @@ mv HADB06-N_S110_L007_R1_001.fastq VA_B_07_18.fastq
 mv HADB06-O_S111_L007_R1_001.fastq RI_W_07_18.fastq
 mv HADB06-P_S112_L007_R1_001.fastq RI_B_07_18.fastq
 
-#5 - Uncomment the last line of the renaming script in your scripts folder that starts with os.popen and comment 
+#5 - uncomment the last line of the renaming script in your scripts folder that starts with os.popen and comment 
 out the next to last line that starts with print
 [amali010@turing1 fastq]$ pwd
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq
@@ -342,7 +342,7 @@ Submitted batch job 9270936
 [amali010@turing1 fastq]$ squeue -u amali010
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
 
-#7 - Make sure this is all documented on your github page
+#7 - make sure this is all documented on your github page
 areej@DESKTOP-RF6VF4N MINGW64 ~/Desktop/BIOL_803_Advanced_Genomics_Data_Analysis/In_class/21sp_advgenomics/AreejsAdvancedGenomicsLog (main)
 $ git add README.md
 
@@ -364,19 +364,20 @@ To https://github.com/areejmalik/AreejsAdvancedGenomicsLog.git
    aa0237a..4326621  main -> main
 Branch 'main' set up to track remote branch 'main' from 'origin'.
 
-#8 - The naming convention for the files is as follows:
-	SOURCEPOPULATION_SYMBIOTICSTATE_GENOTYPE_TEMPERATURE.fastq
-	There are 2 sources: Virginia and Rhode Island
-	There are 2 symbiotic states: Brown and White
+#8 - the naming convention for the files is as follows:
+SOURCEPOPULATION_SYMBIOTICSTATE_GENOTYPE_TEMPERATURE.fastq
+There are 2 sources: Virginia and Rhode Island
+There are 2 symbiotic states: Brown and White
 	
-#9 - Next, you're going to start the process of adapter clipping and quality trimming all the renamed .fastq files in batches, by lane
+#9 - next, you're going to start the process of adapter clipping and quality trimming all the renamed .fastq files in batches, by lane
+Ok!
 
 #10 - cp the script /cm/shared/courses/dbarshis/21AdvGenomics/scripts/Trimclipfilterstatsbatch_advbioinf.py into your scripts directory
 [amali010@coreV1-22-016 data]$ pwd
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data
 [amali010@coreV1-22-016 data]$ cp /cm/shared/courses/dbarshis/21AdvGenomics/scripts/
 
-#11 - Less/head the new script and check out the usage statement
+#11 - less/head the new script and check out the usage statement
 [amali010@coreV1-22-016 data]$ head -14 ../scripts/Trimclipfilterstatsbatch_advbioinf.py
 #!/usr/bin/env python
 # Written by Dan Barshis
@@ -397,7 +398,7 @@ import sys, os
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq
 [amali010@turing1 fastq]$ cp /cm/shared/courses/dbarshis/21AdvGenomics/assignments_exercises/day03/adapterlist_advbioinf.txt ./
 
-#13 - Make a sbatch script for the Trimclipfilter... script and run it on your fastq files
+#13 - make a sbatch script for the Trimclipfilter... script and run it on your fastq files
 [amali010@turing1 ~]$ salloc
 salloc: Pending job allocation 9270954
 salloc: job 9270954 queued and waiting for resources
@@ -430,7 +431,7 @@ Submitted batch job 9270961
 NOTE: I don't know why it keeps failing the job partition I even tried logging out the core and
 remained on turing but that was rejected as well. :(
 
-After multiple attempts
+After multiple attempts!!
 [amali010@turing1 fastq]$ pwd
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq
 [amali010@turing1 fastq]$ nano amFullTrimClip.sh
@@ -472,8 +473,10 @@ areejsrenamer.txt           RI_W_07_18.fastq   VA_W_07_18.fastq
 FullTrimClip.sh             RI_W_07_22.fastq   VA_W_07_22.fastq
 renamingtable_complete.txt  Testing
 RI_B_06_18_clipped.fastq    trimclipstats.txt
+
 Note: need to know how to safely delete the extra files that were made
 while attempting to getting the script to run
+
 [amali010@turing1 fastq]$ squeue -u amali010
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
            9270966      main amTrimFu amali010  R       5:20      1 coreV1-22-005
@@ -484,7 +487,7 @@ while attempting to getting the script to run
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
            9270966      main amTrimFu amali010  R      17:31      1 coreV1-22-005
 
-#14 - Push your notebook file to your github page
+#14 - push your notebook file to your github page
 git add README.md
 git commit -m 'updating readme'
 git push -u origin main
