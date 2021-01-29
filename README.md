@@ -496,5 +496,84 @@ git push -u origin main
 ##Day 04 29-Jan-2021
 * Homework day04 
 ```sh
+Checked the sucess of the job submission from the day before
+[amali010@turing1 areej]$ cd data
+[amali010@turing1 data]$ cd fastq
+[amali010@turing1 fastq]$ ls
+[amali010@turing1 fastq]$ ls filteringstats/
+[amali010@turing1 fastq]$ ls -alh filteringstats/
 
-``
+#1 - add your trimclipstats.txt output to the full class 
+
+#1a - run /cm/shared/courses/dbarshis/21AdvGenomics/scripts/Schafran_trimstatstable_advbioinf_clippedtrimmed.py -h to examine usage
+datafile /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/Fulltrimclipstatstable.txt using the following steps
+[amali010@turing1 fastq]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq
+[amali010@turing1 fastq]$ /cm/shared/courses/dbarshis/21AdvGenomics/scripts/Schafran_trimstatstable_advbioinf_clippedtrimmed.py -h
+Written by Peter Schafran pscha005@odu.edu 5-Oct-2015
+
+This script takes a stats output file from fastx_clipper and converts it into a table.
+
+Usage: Schafran_trimstatstable.py [-c, -v, -h] inputfile.txt outputfile.txt
+
+Options (-c and -v must be listed separately to run together):
+-h      Display this help message
+-c      Use comma delimiter instead of tabs
+-v      Verbose mode (print steps to stdout)
+
+#1b - run the script on your data with the outputfilename YOURNAME_trimclipstatsout.txt
+[amali010@turing1 fastq]$ /cm/shared/courses/dbarshis/21AdvGenomics/scripts/Schafran_trimstatstable_advbioinf_clippedtrimmed.py trimclipstats.txt AREEJ_trimclipstatsout.txt
+
+#1c -  add YOURNAME_trimclipstatsout.txt to the class file by running tail -n +2 YOURNAME_trimclipstatsout.txt >> /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/Fulltrimclipstatstable.txt
+[amali010@turing1 fastq]$ tail -n +2 AREEJ_trimclipstatsout.txt >> /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/Fulltrimclipstatstable.txt
+
+#2 - Now we're going to map our reads back to our assembly using the bowtie2 alignment algorithm (starting to follow this pipeline https://github.com/bethsheets/SNPcalling_tutorial)
+Ok!
+
+#3 - write a sbatch script to do the following commands in sequence on your _clippedtrimmedfilterd.fastq datafiles from your lane of data
+[amali010@turing1 fastq]$ cd QCFastqs
+[amali010@turing1 QCFastqs]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq/QCFastqs
+[amali010@turing1 QCFastqs]$ nano ajbowtie2.sh
+[amali010@turing1 QCFastqs]$ ls
+ajbowtie2.sh                     VA_B_06_18_clippedtrimmed.fastq
+RI_B_06_18_clippedtrimmed.fastq  VA_B_07_14_clippedtrimmed.fastq
+RI_B_07_14_clippedtrimmed.fastq  VA_B_07_18_clippedtrimmed.fastq
+RI_B_07_18_clippedtrimmed.fastq  VA_B_07_22_clippedtrimmed.fastq
+RI_B_07_22_clippedtrimmed.fastq  VA_W_06_18_clippedtrimmed.fastq
+RI_W_06_18_clippedtrimmed.fastq  VA_W_07_14_clippedtrimmed.fastq
+RI_W_07_14_clippedtrimmed.fastq  VA_W_07_18_clippedtrimmed.fastq
+RI_W_07_18_clippedtrimmed.fastq  VA_W_07_22_clippedtrimmed.fastq
+RI_W_07_22_clippedtrimmed.fastq
+[amali010@turing1 QCFastqs]$ cat ajbowtie2.sh
+#!/bin/bash -l
+
+#SBATCH -o ambowtie2.txt
+#SBATCH -n 1
+#SBATCH --mail-user=amali010@odu.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=ambowtie
+
+module load bowtie2/2.4
+for i in *_clippedtrimmed.fastq; do bowtie2 --rg-id ${i%_clippedtrimmed.fastq} \
+--rg SM:${i%_clippedtrimmed.fastq} \
+--very-sensitive -x /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/refassembly/Apoc_hostsym -U $i \
+> ${i%_clippedtrimmedfilterd.fastq}.sam --no-unal -k 5; done
+
+[amali010@turing1 QCFastqs]$ sbatch ajbowtie2.sh
+Submitted batch job 9271117
+[amali010@turing1 QCFastqs]$ squeue -u amali010
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+           9271117      main ambowtie amali010 PD       0:00      1 (Priority)
+  [amali010@turing1 QCFastqs]$ squeue -u amali010
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+           9271117      main ambowtie amali010  R       1:49      1 coreV2-25-049
+[amali010@turing1 QCFastqs]$ squeue -u amali010
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+           9271117      main ambowtie amali010  R       5:07      1 coreV2-25-049
+
+#4 - Submit and add everything to your logfile
+git add README.md
+git commit -m 'updating readme'
+git push -u origin main
+```
