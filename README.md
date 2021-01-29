@@ -413,6 +413,16 @@ After multiple attempts
 [amali010@turing1 fastq]$ pwd
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq
 [amali010@turing1 fastq]$ nano amFullTrimClip.sh
+[amali010@turing1 fastq]$ cat amFullTrimClip.sh
+#!/bin/bash -l
+
+#SBATCH -o amFullTrimclip.txt
+#SBATCH -n 1
+#SBATCH --mail-user=amali010@odu.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=amTrimFull
+
+../../scripts/Trimclipfilterstatsbatch_advbioinf.py adapterlist_advbioinf.txt *.fastq
 [amali010@turing1 fastq]$ sbatch amFullTrimClip.sh
 Submitted batch job 9270966
 [amali010@turing1 fastq]$ squeue -u amali010
@@ -449,6 +459,9 @@ while attempting to getting the script to run
 [amali010@turing1 fastq]$ squeue -u amali010
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
            9270966      main amTrimFu amali010  R       9:01      1 coreV1-22-005
+[amali010@turing1 fastq]$ squeue -u amali010
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+           9270966      main amTrimFu amali010  R      17:31      1 coreV1-22-005
 
 #14 - Push your notebook file to your github page
 git add README.md
