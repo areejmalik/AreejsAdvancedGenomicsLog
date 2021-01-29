@@ -491,5 +491,10 @@ while attempting to getting the script to run
 git add README.md
 git commit -m 'updating readme'
 git push -u origin main
-
 ```
+
+##Day 04 29-Jan-2021
+* Homework day04 
+```sh
+
+``
