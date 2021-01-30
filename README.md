@@ -496,7 +496,7 @@ git push -u origin main
 ##Day 04 29-Jan-2021
 * Homework day04 
 ```sh
-Checked the sucess of the job submission from the day before
+Checked the success of the job submission from the day before
 [amali010@turing1 areej]$ cd data
 [amali010@turing1 data]$ cd fastq
 [amali010@turing1 fastq]$ ls
@@ -576,4 +576,11 @@ Submitted batch job 9271117
 git add README.md
 git commit -m 'updating readme'
 git push -u origin main
+```
+
+##Day 05 03-Feb-2021
+*  day05 
+```sh
+#1 - 
+
 ```
