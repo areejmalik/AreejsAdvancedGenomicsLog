@@ -204,7 +204,8 @@ git push -u origin main
 [amali010@turing1 data]$ mv *.fastq ./fastq/
 
 #3 - cp the renamingtable_complete.txt from the day03 directory into your fastq directory and 
-the /cm/shared/courses/dbarshis/21AdvGenomics/scripts/renamer_advbioinf.py script into your sandbox scripts folder and less the new script and check out the usage statement
+the /cm/shared/courses/dbarshis/21AdvGenomics/scripts/renamer_advbioinf.py script into your 
+sandbox scripts folder and less the new script and check out the usage statement
 [amali010@turing1 data]$ cp ../day03/renamingtable_complete.txt ./fastq/
 [amali010@turing1 data]$ cp /cm/shared/courses/dbarshis/21AdvGenomics/scripts/renamer_advbioinf.py ../scripts/
 [amali010@turing1 data]$ head ../scripts/renamer_advbioinf.py
@@ -315,13 +316,15 @@ mv HADB06-N_S110_L007_R1_001.fastq VA_B_07_18.fastq
 mv HADB06-O_S111_L007_R1_001.fastq RI_W_07_18.fastq
 mv HADB06-P_S112_L007_R1_001.fastq RI_B_07_18.fastq
 
-#5 - uncomment the last line of the renaming script in your scripts folder that starts with os.popen and comment 
-out the next to last line that starts with print
+#5 - uncomment the last line of the renaming script in your scripts folder 
+that starts with os.popen and comment out the next to last line that starts 
+with print
 [amali010@turing1 fastq]$ pwd
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq
 [amali010@turing1 fastq]$ nano ../../scripts/renamer_advbioinf.py
 
-#6 - write a sbatch script and submit it to rename all the .fastq files according to the renaming table using 
+#6 - write a sbatch script and submit it to rename all the .fastq files 
+according to the renaming table using 
 your renamer_advbioinf.py script
 [amali010@turing1 fastq]$ pwd
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq
@@ -369,7 +372,8 @@ SOURCEPOPULATION_SYMBIOTICSTATE_GENOTYPE_TEMPERATURE.fastq
 There are 2 sources: Virginia and Rhode Island
 There are 2 symbiotic states: Brown and White
 	
-#9 - next, you're going to start the process of adapter clipping and quality trimming all the renamed .fastq files in batches, by lane
+#9 - next, you're going to start the process of adapter clipping and quality 
+trimming all the renamed .fastq files in batches, by lane
 Ok!
 
 #10 - cp the script /cm/shared/courses/dbarshis/21AdvGenomics/scripts/Trimclipfilterstatsbatch_advbioinf.py into your scripts directory
@@ -393,7 +397,8 @@ import sys, os
 # -t option in qualitytrim (the lower threshold quality score for trimming)
 # -l option in qualitytrim and adapterclip (the length threshold for throwing out short reads)
 
-#12 - cp the /cm/shared/courses/dbarshis/21AdvGenomics/assignments_exercises/day03/adapterlist_advbioinf.txt into the working directory with your fastq files
+#12 - cp the /cm/shared/courses/dbarshis/21AdvGenomics/assignments_exercises/day03/adapterlist_advbioinf.txt 
+into the working directory with your fastq files
 [amali010@turing1 fastq]$ pwd
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq
 [amali010@turing1 fastq]$ cp /cm/shared/courses/dbarshis/21AdvGenomics/assignments_exercises/day03/adapterlist_advbioinf.txt ./
@@ -428,8 +433,8 @@ Submitted batch job 9270961
 [amali010@coreV1-22-005 fastq]$ squeue -u amali010
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
            9270954      main       sh amali010  R      19:42      1 coreV1-22-005
-NOTE: I don't know why it keeps failing the job partition I even tried logging out the core and
-remained on turing but that was rejected as well. :(
+NOTE: I don't know why it keeps failing the job partition I even tried logging 
+out the core and remained on turing but that was rejected as well. :(
 
 After multiple attempts!!
 [amali010@turing1 fastq]$ pwd
@@ -505,8 +510,9 @@ Checked the success of the job submission from the day before
 
 #1 - add your trimclipstats.txt output to the full class 
 
-#1a - run /cm/shared/courses/dbarshis/21AdvGenomics/scripts/Schafran_trimstatstable_advbioinf_clippedtrimmed.py -h to examine usage
-datafile /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/Fulltrimclipstatstable.txt using the following steps
+#1a - run /cm/shared/courses/dbarshis/21AdvGenomics/scripts/Schafran_trimstatstable_advbioinf_clippedtrimmed.py -h 
+to examine usage datafile /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/Fulltrimclipstatstable.txt 
+using the following steps
 [amali010@turing1 fastq]$ pwd
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq
 [amali010@turing1 fastq]$ /cm/shared/courses/dbarshis/21AdvGenomics/scripts/Schafran_trimstatstable_advbioinf_clippedtrimmed.py -h
@@ -527,10 +533,11 @@ Options (-c and -v must be listed separately to run together):
 #1c -  add YOURNAME_trimclipstatsout.txt to the class file by running tail -n +2 YOURNAME_trimclipstatsout.txt >> /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/Fulltrimclipstatstable.txt
 [amali010@turing1 fastq]$ tail -n +2 AREEJ_trimclipstatsout.txt >> /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/Fulltrimclipstatstable.txt
 
-#2 - Now we're going to map our reads back to our assembly using the bowtie2 alignment algorithm (starting to follow this pipeline https://github.com/bethsheets/SNPcalling_tutorial)
+#2 - now we're going to map our reads back to our assembly using the bowtie2 alignment algorithm (starting to follow this pipeline https://github.com/bethsheets/SNPcalling_tutorial)
 Ok!
 
-#3 - write a sbatch script to do the following commands in sequence on your _clippedtrimmedfilterd.fastq datafiles from your lane of data
+#3 - write a sbatch script to do the following commands in sequence on 
+your _clippedtrimmedfilterd.fastq datafiles from your lane of data
 [amali010@turing1 fastq]$ cd QCFastqs
 [amali010@turing1 QCFastqs]$ pwd
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq/QCFastqs
@@ -572,15 +579,125 @@ Submitted batch job 9271117
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
            9271117      main ambowtie amali010  R       5:07      1 coreV2-25-049
 
-#4 - Submit and add everything to your logfile
+#4 - submit and add everything to your logfile
 git add README.md
 git commit -m 'updating readme'
 git push -u origin main
 ```
 
 ##Day 05 03-Feb-2021
-*  day05 
+* Exercise day05 
 ```sh
-#1 - 
+#1 - team up with a partner for this one and work only on a combined set of 
+data for your two lanes of sequences
+Partner: Andrew
+Combined set of data lanes: 1, 6, & 7
+
+#2 - run the Trinity denovo assembler on your clippedtrimmed.fastq files for 
+your two lanes together
+Done!
+
+#3 - modify the below sbatch script (note the differences in the header 
+compared to the previous one)
+Original script (used from homework_day05.txt file)
+
+Edited script
+New name: APAMAssemble.sh
+Location: /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/apearson/data/fastq/QCFastqs/apam/
+#!/bin/bash -l
+
+#SBATCH -o APAMAssemble.txt
+#SBATCH -n 32
+#SBATCH -p himem
+#SBATCH --mail-user=pearsoac@evms.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=APAMAssemble
+
+enable_lmod
+module load container_env trinity
+
+crun Trinity --seqType fq --max_memory 768G --normalize_reads --single RI_B_01_14_clippedtrimmed.fastq,RI_W_06_18_clippedtrimmed.fastq,VA_B_07_22_clippedtrimmed.fastq,RI_B_01_18_clippedtrimmed.fastq,RI_W_07_14_clippedtrimmed.fastq,VA_B_09_SNP_clippedtrimmed.fastq,RI_B_01_22_clippedtrimmed.fastq,RI_W_07_18_clippedtrimmed.fastq,VA_W_01_14_clippedtrimmed.fastq,RI_B_06_18_clippedtrimmed.fastq,RI_W_07_22_clippedtrimmed.fastq,VA_W_01_18_clippedtrimmed.fastq,RI_B_07_14_clippedtrimmed.fastq,RI_W_08_SNP_clippedtrimmed.fastq,VA_W_01_22_clippedtrimmed.fastq,RI_B_07_18_clippedtrimmed.fastq,VA_B_01_14_clippedtrimmed.fastq,VA_W_06_18_clippedtrimmed.fastq,RI_B_07_22_clippedtrimmed.fastq,VA_B_01_18_clippedtrimmed.fastq,VA_W_07_14_clippedtrimmed.fastq,RI_B_08_SNP_clippedtrimmed.fastq,VA_B_01_22_clippedtrimmed.fastq,VA_W_07_18_clippedtrimmed.fastq,RI_W_01_14_clippedtrimmed.fastq,VA_B_06_18_clippedtrimmed.fastq,VA_W_07_22_clippedtrimmed.fastq,RI_W_01_18_clippedtrimmed.fastq,VA_B_07_14_clippedtrimmed.fastq,VA_W_08_SNP_clippedtrimmed.fastq,RI_W_01_22_clippedtrimmed.fastq,VA_B_07_18_clippedtrimmed.fastq --CPU 32
+
+#4 - check https://trinityrnaseq.github.io/ for usage info
+Done!
+
+#5 - submit your trinity script
+Note: It was done by Andrew, so the following is from his notebook.
+[apear012@turing1 apam]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/apearson/data/fastq/QCFastqs/apam
+[apear012@coreV2-22-007 apam]$ sbatch APAMAssemble.sh 
+Submitted batch job 9272358
+
+[amali010@turing1 apam]$ squeue -u amali010
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+[amali010@turing1 apam]$ squeue -u apear012
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+           9272358     himem APAMAsse apear012 PD       0:00      1 (Resources)
+           9272334      main       sh apear012  R    1:19:50      1 coreV2-25-002
+           9272357      main       sh apear012  R       6:49      1 coreV2-22-007
+[amali010@turing1 apam]$ squeue -u apear012
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+           9272358     himem APAMAsse apear012 PD       0:00      1 (Resources)
+           9272334      main       sh apear012  R    1:20:18      1 coreV2-25-002
+           9272357      main       sh apear012  R       7:17      1 coreV2-22-007
+Note: Job failed after approximately 15 minutes :(
+
+Edited APAMAssemble.sh file (removed --normalize_reads). This was also done by Andrew.
+#!/bin/bash -l
+
+#SBATCH -o APAMAssemble.txt
+#SBATCH -n 32
+#SBATCH -p himem
+#SBATCH --mail-user=pearsoac@evms.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=APAMAssemble
+
+enable_lmod
+module load container_env trinity
+
+crun Trinity --seqType fq --max_memory 768G --single RI_B_01_14_clippedtrimmed.fastq,RI_W_06_18_clippedtrimmed.fastq,VA_B_07_22_clippedtrimmed.fastq,RI_B_01_18_clippedtrimmed.fastq,RI_W_07_14_clippedtrimmed.fastq,VA_B_09_SNP_clippedtrimmed.fastq,RI_B_01_22_clippedtrimmed.fastq,RI_W_07_18_clippedtrimmed.fastq,VA_W_01_14_clippedtrimmed.fastq,RI_B_06_18_clippedtrimmed.fastq,RI_W_07_22_clippedtrimmed.fastq,VA_W_01_18_clippedtrimmed.fastq,RI_B_07_14_clippedtrimmed.fastq,RI_W_08_SNP_clippedtrimmed.fastq,VA_W_01_22_clippedtrimmed.fastq,RI_B_07_18_clippedtrimmed.fastq,VA_B_01_14_clippedtrimmed.fastq,VA_W_06_18_clippedtrimmed.fastq,RI_B_07_22_clippedtrimmed.fastq,VA_B_01_18_clippedtrimmed.fastq,VA_W_07_14_clippedtrimmed.fastq,RI_B_08_SNP_clippedtrimmed.fastq,VA_B_01_22_clippedtrimmed.fastq,VA_W_07_18_clippedtrimmed.fastq,RI_W_01_14_clippedtrimmed.fastq,VA_B_06_18_clippedtrimmed.fastq,VA_W_07_22_clippedtrimmed.fastq,RI_W_01_18_clippedtrimmed.fastq,VA_B_07_14_clippedtrimmed.fastq,VA_W_08_SNP_clippedtrimmed.fastq,RI_W_01_22_clippedtrimmed.fastq,VA_B_07_18_clippedtrimmed.fastq --CPU 32
+
+[apear012@turing1 apam]$ sbatch APAMAssemble.sh
+Submitted batch job 9272385
+[apear012@turing1 apam]$ squeue -u apear012
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON) 
+           9272357      main       sh apear012  R    1:15:39      1 coreV2-22-007 
+           9272385     himem APAMAsse apear012  R       0:14      1 coreV4-21-himem-003
+           
+#6 - submit and add everything to your logfile
+git add README.md
+git commit -m 'updating readme'
+git push -u origin main
+```
+
+##Day 06 05-Feb-2021
+*  Exercise day05 
+```sh
+#1 - start an interactive session via salloc and run 
+the /cm/shared/apps/trinity/2.0.6/util/TrinityStats.pl script on your 
+Trinity.fasta output from your assembly
+
+#2 - compare this with the output from avg_cov_len_fasta_advbioinf.py on 
+our class reference assembly (/cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/refassembly/15079_Apoc_hostsym.fasta) 
+and add both to your logfile
+
+#3 - less or head your bowtie2 job output file to look at your alignment 
+statistics and calculate the following from the information:
+
+#3a - the mean percent "overall alignment rate"
+
+#3b - the mean percent reads "aligned exactly 1 time"
+
+#3c - the mean number of reads "aligned exactly 1 time"
+
+#3d - the mean percent reads "aligned >1 times"
+
+hint use grep and paste into excel
+
+#4 - add your statistics as single rows to the shared table 
+/cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/alignmentstatstable.txt as tab-delimited text 
+in the following order:
+LaneX_yourinitials	b-the mean percent "overall alignment rate"	c-the mean percent reads "aligned exactly 1 time"	d-the mean number of reads "aligned exactly 1 time"	e-the mean percent reads "aligned >1 times"
+
 
 ```
