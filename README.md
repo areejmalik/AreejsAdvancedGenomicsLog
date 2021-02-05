@@ -671,7 +671,7 @@ git push -u origin main
 ```
 
 ##Day 06 05-Feb-2021
-*  Exercise day05 
+*  Exercise day06 
 ```sh
 #1 - start an interactive session via salloc and run 
 the /cm/shared/apps/trinity/2.0.6/util/TrinityStats.pl script on your 
