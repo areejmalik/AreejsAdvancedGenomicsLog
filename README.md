@@ -676,28 +676,240 @@ git push -u origin main
 #1 - start an interactive session via salloc and run 
 the /cm/shared/apps/trinity/2.0.6/util/TrinityStats.pl script on your 
 Trinity.fasta output from your assembly
+[amali010@turing1 djbtestassembly]$ salloc
+salloc: Pending job allocation 9272860
+salloc: job 9272860 queued and waiting for resources
+salloc: job 9272860 has been allocated resources
+salloc: Granted job allocation 9272860
+
+[amali010@turing1 djbtestassembly]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/djbtestassembly
+[amali010@coreV2-22-007 djbtestassembly]$ /cm/shared/apps/trinity/2.0.6/util/TrinityStats.pl Trinity.fasta
+
+
+################################
+## Counts of transcripts, etc.
+################################
+Total trinity 'genes':  20980
+Total trinity transcripts:      21992
+Percent GC: 46.21
+
+########################################
+Stats based on ALL transcript contigs:
+########################################
+
+        Contig N10: 1178
+        Contig N20: 694
+        Contig N30: 514
+        Contig N40: 414
+        Contig N50: 347
+
+        Median contig length: 273
+        Average contig: 356.95
+        Total assembled bases: 7850006
+
+
+#####################################################
+## Stats based on ONLY LONGEST ISOFORM per 'GENE':
+#####################################################
+
+        Contig N10: 1027
+        Contig N20: 643
+        Contig N30: 486
+        Contig N40: 397
+        Contig N50: 336
+
+        Median contig length: 271
+        Average contig: 347.72
+        Total assembled bases: 7295061
 
 #2 - compare this with the output from avg_cov_len_fasta_advbioinf.py on 
 our class reference assembly (/cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/refassembly/15079_Apoc_hostsym.fasta) 
 and add both to your logfile
+[amali010@coreV2-22-007 djbtestassembly]$ /cm/shared/courses/dbarshis/21AdvGenomics/scripts/avg_cov_len_fasta_advbioinf.py /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/refassembly/15079_Apoc_hostsym.fasta
+The total number of sequences is 15079
+The average sequence length is 876
+The total number of bases is 13210470
+The minimum sequence length is 500
+The maximum sequence length is 10795
+The N50 is 881
+Median Length = 578
+contigs < 150bp = 0
+contigs >= 500bp = 15079
+contigs >= 1000bp = 3660
+contigs >= 2000bp = 536
 
 #3 - less or head your bowtie2 job output file to look at your alignment 
 statistics and calculate the following from the information:
 
 #3a - the mean percent "overall alignment rate"
+[amali010@coreV2-22-007 QCFastqs]$ less ambowtie2.txt
+[amali010@turing1 QCFastqs]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq/QCFastqs
+[amali010@coreV2-22-007 QCFastqs]$ grep "overall alignment rate" ambowtie2.txt
+1.87% overall alignment rate
+1.53% overall alignment rate
+1.46% overall alignment rate
+1.92% overall alignment rate
+1.65% overall alignment rate
+1.48% overall alignment rate
+1.25% overall alignment rate
+1.60% overall alignment rate
+1.94% overall alignment rate
+2.00% overall alignment rate
+1.67% overall alignment rate
+2.09% overall alignment rate
+1.62% overall alignment rate
+1.54% overall alignment rate
+1.70% overall alignment rate
+1.41% overall alignment rate
+
+[amali010@coreV2-22-007 QCFastqs]$ grep "overall alignment rate" ambowtie2.txt | cut -d "%" -f 1
+1.87
+1.53
+1.46
+1.92
+1.65
+1.48
+1.25
+1.60
+1.94
+2.00
+1.67
+2.09
+1.62
+1.54
+1.70
+1.41
 
 #3b - the mean percent reads "aligned exactly 1 time"
+[amali010@coreV2-22-007 QCFastqs]$ grep "aligned exactly 1 time" ambowtie2.txt
+    312173 (1.32%) aligned exactly 1 time
+    279609 (1.10%) aligned exactly 1 time
+    226384 (0.96%) aligned exactly 1 time
+    29903 (1.24%) aligned exactly 1 time
+    210196 (1.09%) aligned exactly 1 time
+    359056 (0.96%) aligned exactly 1 time
+    225886 (0.88%) aligned exactly 1 time
+    183780 (1.06%) aligned exactly 1 time
+    207948 (1.27%) aligned exactly 1 time
+    228135 (1.33%) aligned exactly 1 time
+    250518 (1.09%) aligned exactly 1 time
+    195159 (1.31%) aligned exactly 1 time
+    195302 (1.13%) aligned exactly 1 time
+    234155 (1.07%) aligned exactly 1 time
+    176134 (0.87%) aligned exactly 1 time
+    243143 (0.89%) aligned exactly 1 time
+
+[amali010@coreV2-22-007 QCFastqs]$ grep "aligned exactly 1 time" ambowtie2.txt | cut -d "%" -f 1 | cut -d "(" -f 2
+1.32
+1.10
+0.96
+1.24
+1.09
+0.96
+0.88
+1.06
+1.27
+1.33
+1.09
+1.31
+1.13
+1.07
+0.87
+0.89
 
 #3c - the mean number of reads "aligned exactly 1 time"
+[amali010@turing1 QCFastqs]$ grep "aligned exactly 1 time" ambowtie2.txt
+    312173 (1.32%) aligned exactly 1 time
+    279609 (1.10%) aligned exactly 1 time
+    226384 (0.96%) aligned exactly 1 time
+    29903 (1.24%) aligned exactly 1 time
+    210196 (1.09%) aligned exactly 1 time
+    359056 (0.96%) aligned exactly 1 time
+    225886 (0.88%) aligned exactly 1 time
+    183780 (1.06%) aligned exactly 1 time
+    207948 (1.27%) aligned exactly 1 time
+    228135 (1.33%) aligned exactly 1 time
+    250518 (1.09%) aligned exactly 1 time
+    195159 (1.31%) aligned exactly 1 time
+    195302 (1.13%) aligned exactly 1 time
+    234155 (1.07%) aligned exactly 1 time
+    176134 (0.87%) aligned exactly 1 time
+    243143 (0.89%) aligned exactly 1 time
+    
+    [amali010@coreV2-22-007 QCFastqs]$ grep "aligned exactly 1 time" ambowtie2.txt | cut -d " " -f 5
+312173
+279609
+226384
+29903
+210196
+359056
+225886
+183780
+207948
+228135
+250518
+195159
+195302
+234155
+176134
+243143
 
 #3d - the mean percent reads "aligned >1 times"
+[amali010@coreV2-22-007 QCFastqs]$ grep "aligned >1 times" ambowtie2.txt
+    131960 (0.56%) aligned >1 times
+    109989 (0.43%) aligned >1 times
+    119408 (0.50%) aligned >1 times
+    16432 (0.68%) aligned >1 times
+    107800 (0.56%) aligned >1 times
+    194361 (0.52%) aligned >1 times
+    95504 (0.37%) aligned >1 times
+    93466 (0.54%) aligned >1 times
+    110827 (0.68%) aligned >1 times
+    115424 (0.67%) aligned >1 times
+    131960 (0.58%) aligned >1 times
+    116526 (0.78%) aligned >1 times
+    83427 (0.48%) aligned >1 times
+    103215 (0.47%) aligned >1 times
+    169138 (0.83%) aligned >1 times
+    140557 (0.52%) aligned >1 times
 
+[amali010@coreV2-22-007 QCFastqs]$ grep "aligned >1 times" ambowtie2.txt | cut -d "%" -f 1 | cut -d "(" -f 2
+0.56
+0.43
+0.50
+0.68
+0.56
+0.52
+0.37
+0.54
+0.68
+0.67
+0.58
+0.78
+0.48
+0.47
+0.83
+0.52
 hint use grep and paste into excel
 
 #4 - add your statistics as single rows to the shared table 
 /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/alignmentstatstable.txt as tab-delimited text 
 in the following order:
 LaneX_yourinitials	b-the mean percent "overall alignment rate"	c-the mean percent reads "aligned exactly 1 time"	d-the mean number of reads "aligned exactly 1 time"	e-the mean percent reads "aligned >1 times"
-
+[amali010@turing1 QCFastqs]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq/QCFastqs
+[amali010@coreV2-22-007 QCFastqs]$ nano alignstatsam.txt
+[amali010@coreV2-22-007 QCFastqs]$ cat alignstatsam.txt >> /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/alignmentstatstable.txt
+[amali010@coreV2-22-007 QCFastqs]$ tail -f /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/alignmentstatstable.txt
+LaneX   overallalignmentrate    percsinglyaligned       numsinglyaligned        percmultiplyaligned
+LaneX_djb       2.495714286     1.251428571     247656.7143     1.247142857
+LaneX_djb       2.495714286     1.251428571     247656.7143     1.247142857
+Lane1AP 5.378125        1.3725  300361.8125     4.005
+lane5_sg        2.03%   1.11%   235455.75       0.92%
+LaneX_jcw       2.495714286     1.251428571     247656.7143     1.247142857
+Lane4_KCrid     2.48    1.30    289072.88       1.18
+LaneX_am 1.670625       1.098125        222342.5625     0.573125
 
 ```
