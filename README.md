@@ -912,4 +912,97 @@ LaneX_jcw       2.495714286     1.251428571     247656.7143     1.247142857
 Lane4_KCrid     2.48    1.30    289072.88       1.18
 LaneX_am 1.670625       1.098125        222342.5625     0.573125
 
+#5 - Data cleanup and archiving:
+#5a - mv your Trinity.fast file from your trinity_out_dir to a folder 
+called testassembly in your data directory
+Note: our job was still running at the time. So to avoid confusion I decided to
+work with the Trinity.fasta file that was copied into my data directory during class.
+[amali010@turing1 data]$ mkdir testassembly
+[amali010@turing1 data]$ cd djbtestassembly/
+[amali010@turing1 djbtestassembly]$ ls
+Trinity.fasta
+[amali010@turing1 djbtestassembly]$ mv Trinity.fasta /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/testassembly/
+[amali010@turing1 testassembly]$ ls
+Trinity.fasta
+
+#5b - set up a sbatch script to:
+	rm -r YOURtrinity_out_dir (don't have one so this will be skipped in the sbatch script)
+	rm -r YOURoriginalfastqs
+	rm -r YOURfilterstats # as long as you've already appended your filteringstats output to the class as part of homework_day04.txt
+original script (used from homework_ day06.txt file)
+#!/bin/bash -l
+
+#SBATCH -o OUTFILENAME.txt
+#SBATCH -n NUMTHREADS(1 if not multi-threaded)
+#SBATCH --mail-user=YOUREMAIL@odu.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=JOBNAME
+
+rm -r /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/dan/data/fastq/QCFastqs/21sampleassembly_trinity_out_dir
+rm -r /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/dan/data/fastq/originalfastqs
+rm -r /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/dan/data/fastq/filteringstats
+
+[amali010@turing1 originalfastqs]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq/originalfastqs
+
+[amali010@turing1 filteringstats]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq/filteringstats
+
+[amali010@turing1 fastq]$ nano AMCleanup.sh
+[amali010@turing1 fastq]$ head AMCleanup.sh
+#!/bin/bash -l
+
+#SBATCH -o AMCleanup.txt
+#SBATCH -n 1
+#SBATCH --mail-user=amali010@odu.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=AMCleanup
+
+rm -r /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq/originalfastqs
+rm -r /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq/filteringstats
+
+[amali010@turing1 fastq]$ sbatch AMCleanup.sh
+Submitted batch job 9273090
+[amali010@turing1 fastq]$ squeue -u amali010
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+           9273090      main AMCleanu amali010  R       0:01      1 coreV2-22-007
+
+#6 - submit a blast against sprot from your testassembly folder using the following command
+#!/bin/bash -l
+
+#SBATCH -o OUTFILENAME.txt
+#SBATCH -n 6         
+#SBATCH --mail-user=EMAIL
+#SBATCH --mail-type=END
+#SBATCH --job-name=JOBNAME
+
+enable_lmod
+module load container_env blast
+blastx -query Trinity.fasta -db /cm/shared/apps/blast/databases/uniprot_sprot_Sep2018 -out blastx.outfmt6 \
+        -evalue 1e-20 -num_threads 6 -max_target_seqs 1 -outfmt 6
+
+[amali010@turing1 testassembly]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/testassembly
+[amali010@turing1 testassembly]$ nano AMBlast.sh
+[amali010@turing1 testassembly]$ cat AMBlast.sh
+#!/bin/bash -l
+
+#SBATCH -o AMBlast.txt
+#SBATCH -n 6
+#SBATCH --mail-user=amali010@odu.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=AMBlast
+
+enable_lmod
+module load container_env blast
+blastx -query Trinity.fasta -db /cm/shared/apps/blast/databases/uniprot_sprot_Sep2018 -out blastx.outfmt6 \
+        -evalue 1e-20 -num_threads 6 -max_target_seqs 1 -outfmt 6
+[amali010@turing1 testassembly]$ sbatch AMBlast.sh
+Submitted batch job 9273094
+[amali010@turing1 testassembly]$ squeue -u amali010
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+           9273094      main  AMBlast amali010  R       0:03      1 coreV2-22-028
+[amali010@turing1 areej]$ squeue -u amali010
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+           9273094      main  AMBlast amali010  R      58:38      1 coreV2-22-028
 ```
