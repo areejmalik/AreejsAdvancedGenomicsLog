@@ -1123,8 +1123,25 @@ for i in *UNSORTED.bam; do samtools sort $i > ${i%_UNSORTED.bam}.bam
 samtools index ${i%_UNSORTED.bam}.bam
 
 done
+
 [amali010@turing1 QCFastqs]$ sbatch AMReadSort.sh
 Submitted batch job 9273103
+[amali010@turing1 QCFastqs]$ squeue -u amali010
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+           9273094      main  AMBlast amali010  R    1:21:32      1 coreV2-22-028
+           9273103      main AMReadSo amali010  R       0:04      1 coreV3-23-020
+[amali010@turing1 QCFastqs]$ squeue -u amali010
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+           9273094      main  AMBlast amali010  R    1:22:36      1 coreV2-22-028
+           9273103      main AMReadSo amali010  R       1:08      1 coreV3-23-020
+[amali010@turing1 QCFastqs]$ squeue -u amali010
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+           9273094      main  AMBlast amali010  R    1:25:19      1 coreV2-22-028
+
+#11 - submit and add everything to your logfile
+git add README.md
+git commit -m 'updating readme'
+git push -u origin main
 
 
 ```
