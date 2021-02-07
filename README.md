@@ -1021,7 +1021,8 @@ Submitted batch job 9273094
 @SQ     SN:TR104|c0_g1_i1_coral LN:607
 @SQ     SN:TR105|c0_g1_i1_coral LN:587
 
-#8 - grep -v '@' your.sam | head to look at the sequence read lines, why does this work to exclude the header lines?
+#8 - grep -v '@' your.sam | head to look at the sequence read lines, 
+why does this work to exclude the header lines?
 [amali010@turing1 QCFastqs]$ grep -v "@" RI_B_06_18_clippedtrimmed.fastq.sam | head
 K00188:59:HMTFHBBXX:7:1101:12845:1666   16      TR13647|c0_g1_i1_coral  40      255
 51M     *       0       0       TTTGGATTCTTGATCACGGTATGATCGATAAAACACAGACCTGTAAAGTCC
@@ -1051,7 +1052,7 @@ K00188:59:HMTFHBBXX:7:1101:23094:1701   16      TR29978|c0_g2_i1_coral  5       
 51M     *       0       0       CTGGGGGAATCCTTGTTAGTTTCTTTTCCTCCGCTTATTAATATGCTTAAA
 JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJFFFAA     AS:i:-29        XN:i:0  XM:i:5      XO:i:0  XG:i:0  NM:i:5  MD:Z:2A0A31G1C12G0      YT:Z:UU RG:Z:RI_B_06_18
 
-Header lines include '@'. The -v in grep -v excludes '@' and therefore the header lines as well
+Header lines include '@'. The -v in grep -v excludes '@' and therefore the header lines as well.
 
 #9 - in an interactive session run /cm/shared/courses/dbarshis/21AdvGenomics/scripts/get_explain_sam_flags_advbioinf.py on 2-3 of your .sam files using * to select 2-3 at the same time.
 [amali010@turing1 QCFastqs]$ /cm/shared/courses/dbarshis/21AdvGenomics/scripts/get_explain_sam_flags_advbioinf.py RI_B_06_18_clippedtrimmed.fastq.sam RI_B_07_18_clippedtrimmed.fastq.sam RI_W_07_18_clippedtrimmed.fastq.sam
@@ -1086,7 +1087,8 @@ RI_W_07_18_clippedtrimmed.fastq.sam
 16 :
         read reverse strand
 
-#10 - we need to run the read sorting step required for SNP calling, so if you have time, set up and run the following script on your .sam files to finish before Wednesday
+#10 - we need to run the read sorting step required for SNP calling, 
+so if you have time, set up and run the following script on your .sam files to finish before Wednesday
 #!/bin/bash -l
 
 #SBATCH -o OUTFILENAME.txt
