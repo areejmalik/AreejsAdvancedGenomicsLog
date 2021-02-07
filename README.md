@@ -1005,4 +1005,126 @@ Submitted batch job 9273094
 [amali010@turing1 areej]$ squeue -u amali010
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
            9273094      main  AMBlast amali010  R      58:38      1 coreV2-22-028
+
+#7 - head one of your .sam files to look at the header
+[amali010@turing1 QCFastqs]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq/QCFastqs
+[amali010@turing1 QCFastqs]$ head RI_B_06_18_clippedtrimmed.fastq.sam
+@HD     VN:1.0  SO:unsorted
+@SQ     SN:TR78|c0_g1_i1_coral  LN:1109
+@SQ     SN:TR78|c0_g2_i1_coral  LN:1109
+@SQ     SN:TR79|c0_g1_i1_coral  LN:610
+@SQ     SN:TR79|c0_g2_i1_coral  LN:1549
+@SQ     SN:TR87|c0_g1_i1_coral  LN:732
+@SQ     SN:TR93|c0_g1_i1_coral  LN:550
+@SQ     SN:TR101|c0_g1_i1_coral LN:673
+@SQ     SN:TR104|c0_g1_i1_coral LN:607
+@SQ     SN:TR105|c0_g1_i1_coral LN:587
+
+#8 - grep -v '@' your.sam | head to look at the sequence read lines, why does this work to exclude the header lines?
+[amali010@turing1 QCFastqs]$ grep -v "@" RI_B_06_18_clippedtrimmed.fastq.sam | head
+K00188:59:HMTFHBBXX:7:1101:12845:1666   16      TR13647|c0_g1_i1_coral  40      255
+51M     *       0       0       TTTGGATTCTTGATCACGGTATGATCGATAAAACACAGACCTGTAAAGTCC
+JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJFFFAA     AS:i:0  XN:i:0  XM:i:0  XO:i:0      XG:i:0  NM:i:0  MD:Z:51 YT:Z:UU RG:Z:RI_B_06_18
+K00188:59:HMTFHBBXX:7:1101:17645:1683   16      TR43786|c0_g1_i16_coral 125     1  51M      *       0       0       AAGAGTACTAAATGGTAACCAGCGAGTCCGTGTAGAAGTATTTTGTAGGTC
+JJJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJFFFAA     AS:i:0  XS:i:0  XN:i:0  XM:i:0      XO:i:0  XG:i:0  NM:i:0  MD:Z:51 YT:Z:UU RG:Z:RI_B_06_18
+K00188:59:HMTFHBBXX:7:1101:17645:1683   272     TR43786|c0_g1_i5_coral  151     255
+51M     *       0       0       AAGAGTACTAAATGGTAACCAGCGAGTCCGTGTAGAAGTATTTTGTAGGTC
+JJJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJFFFAA     AS:i:0  XS:i:0  XN:i:0  XM:i:0      XO:i:0  XG:i:0  NM:i:0  MD:Z:51 YT:Z:UU RG:Z:RI_B_06_18
+K00188:59:HMTFHBBXX:7:1101:20750:1683   0       TR24696|c0_g1_i2_coral  329     1  51M      *       0       0       CCCCACTACCAGAAATTATACGCTCGAGTTACCCACATTTGGGGTAATCGC
+AAFFFJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJFJJJJJJ     AS:i:0  XS:i:0  XN:i:0  XM:i:0      XO:i:0  XG:i:0  NM:i:0  MD:Z:51 YT:Z:UU RG:Z:RI_B_06_18
+K00188:59:HMTFHBBXX:7:1101:20750:1683   256     TR24696|c0_g1_i3_coral  329     255
+51M     *       0       0       CCCCACTACCAGAAATTATACGCTCGAGTTACCCACATTTGGGGTAATCGC
+AAFFFJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJFJJJJJJ     AS:i:0  XS:i:0  XN:i:0  XM:i:0      XO:i:0  XG:i:0  NM:i:0  MD:Z:51 YT:Z:UU RG:Z:RI_B_06_18
+K00188:59:HMTFHBBXX:7:1101:22658:1683   16      TR43764|c4_g1_i1_coral  1687    255
+51M     *       0       0       TCCATTCCTAATCCGTCTGTTAGTGGTCTGCAGTTCCACGCCGTCTTTTCG
+JJJJJJJFJJFJJJJJJJJJJJJJJJJJJJJJJJJJJFJJJJJJFJFFAAA     AS:i:-17        XN:i:0  XM:i:3      XO:i:0  XG:i:0  NM:i:3  MD:Z:25T7C14G2  YT:Z:UU RG:Z:RI_B_06_18
+K00188:59:HMTFHBBXX:7:1101:27854:1683   16      TR29978|c0_g2_i1_coral  10      255
+51M     *       0       0       GGAATCCTTGTTAGTTTCTTTTCCTCCGCTTATTAATATGCTTAAATTCAG
+JJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJFFFAA     AS:i:-28        XN:i:0  XM:i:5      XO:i:0  XG:i:0  NM:i:5  MD:Z:30G1C12G1C0A2      YT:Z:UU RG:Z:RI_B_06_18
+K00188:59:HMTFHBBXX:7:1101:2392:1701    0       TR35685|c1_g2_i1_coral  534     255
+21M     *       0       0       TGACAACCCCGTCTGTGGCGC   AAFFFFJJJJJFFJJJJJFFJ   AS:i:-6     XN:i:0  XM:i:1  XO:i:0  XG:i:0  NM:i:1  MD:Z:7A13       YT:Z:UU RG:Z:RI_B_06_18
+K00188:59:HMTFHBBXX:7:1101:19705:1701   16      TR29978|c0_g2_i1_coral  14      255
+51M     *       0       0       TCCTTGTTAGTTTCTTTTCCTCCGCTTATTAATATGCTTAAATTCAGCGGG
+JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJFFFAA     AS:i:-30        XN:i:0  XM:i:5      XO:i:0  XG:i:0  NM:i:5  MD:Z:26G1C12G1C0A6      YT:Z:UU RG:Z:RI_B_06_18
+K00188:59:HMTFHBBXX:7:1101:23094:1701   16      TR29978|c0_g2_i1_coral  5       255
+51M     *       0       0       CTGGGGGAATCCTTGTTAGTTTCTTTTCCTCCGCTTATTAATATGCTTAAA
+JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJFFFAA     AS:i:-29        XN:i:0  XM:i:5      XO:i:0  XG:i:0  NM:i:5  MD:Z:2A0A31G1C12G0      YT:Z:UU RG:Z:RI_B_06_18
+
+Header lines include '@'. The -v in grep -v excludes '@' and therefore the header lines as well
+
+#9 - in an interactive session run /cm/shared/courses/dbarshis/21AdvGenomics/scripts/get_explain_sam_flags_advbioinf.py on 2-3 of your .sam files using * to select 2-3 at the same time.
+[amali010@turing1 QCFastqs]$ /cm/shared/courses/dbarshis/21AdvGenomics/scripts/get_explain_sam_flags_advbioinf.py RI_B_06_18_clippedtrimmed.fastq.sam RI_B_07_18_clippedtrimmed.fastq.sam RI_W_07_18_clippedtrimmed.fastq.sam
+RI_B_06_18_clippedtrimmed.fastq.sam
+['0', '272', '256', '16']
+0 :
+272 :
+        read reverse strand
+        not primary alignment
+256 :
+        not primary alignment
+16 :
+        read reverse strand
+RI_B_07_18_clippedtrimmed.fastq.sam
+['0', '272', '256', '16']
+0 :
+272 :
+        read reverse strand
+        not primary alignment
+256 :
+        not primary alignment
+16 :
+        read reverse strand
+RI_W_07_18_clippedtrimmed.fastq.sam
+['0', '272', '256', '16']
+0 :
+272 :
+        read reverse strand
+        not primary alignment
+256 :
+        not primary alignment
+16 :
+        read reverse strand
+
+#10 - we need to run the read sorting step required for SNP calling, so if you have time, set up and run the following script on your .sam files to finish before Wednesday
+#!/bin/bash -l
+
+#SBATCH -o OUTFILENAME.txt
+#SBATCH -n 1         
+#SBATCH --mail-user=EMAIL
+#SBATCH --mail-type=END
+#SBATCH --job-name=JOBNAME
+
+enable_lmod
+module load samtools/1
+for i in *.sam; do `samtools view -bS $i > ${i%.sam}_UNSORTED.bam`; done
+
+for i in *UNSORTED.bam; do samtools sort $i > ${i%_UNSORTED.bam}.bam
+samtools index ${i%_UNSORTED.bam}.bam
+done
+
+[amali010@turing1 QCFastqs]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq/QCFastqs
+[amali010@turing1 QCFastqs]$ nano AMReadSort.sh
+[amali010@turing1 QCFastqs]$ cat AMReadSort.sh
+#!/bin/bash -l
+
+#SBATCH -o AMReadSort.txt
+#SBATCH -n 1
+#SBATCH --mail-user=amali010@odu.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=AMReadSort
+
+enable_lmod
+module load samtools/1
+for i in *.sam; do `samtools view -bS $i > ${i%.sam}_UNSORTED.bam`; done
+
+for i in *UNSORTED.bam; do samtools sort $i > ${i%_UNSORTED.bam}.bam
+samtools index ${i%_UNSORTED.bam}.bam
+
+done
+[amali010@turing1 QCFastqs]$ sbatch AMReadSort.sh
+Submitted batch job 9273103
+
+
 ```
