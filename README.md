@@ -669,7 +669,10 @@ git add README.md
 git commit -m 'updating readme'
 git push -u origin main
 ```
-
+##Day 05 03-Feb-2021
+```sh
+No homework
+```
 ##Day 06 05-Feb-2021
 *  Exercise day06 
 ```sh
@@ -1144,6 +1147,116 @@ Submitted batch job 9273103
 git add README.md
 git commit -m 'updating readme'
 git push -u origin main
+```
 
+##Day 07 10-Feb-2021
+*  Exercise day07 
+```sh
+#1 - run the following command on your sprot output file to process into the contig length/match format that trinity examines
+#!/bin/bash -l
 
+#SBATCH -o OUTFILE.TXT
+#SBATCH -n 1
+#SBATCH --mail-user=YOUREMAIL.odu.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=JOBNAME
+
+/cm/shared/apps/trinity/2.0.6/util/analyze_blastPlus_topHit_coverage.pl blastx.outfmt6 Trinity.fasta /cm/shared/apps/blast/databases/uniprot_sprot_Sep2018.fasta
+
+[amali010@turing1 testassembly]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/testassembly
+[amali010@turing1 testassembly]$ cat AMBlastparse.sh
+#!/bin/bash -l
+
+#SBATCH -o AMBlastparse.TXT
+#SBATCH -n 1
+#SBATCH --mail-user=amali010.odu.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=AMBlastparse
+
+/cm/shared/apps/trinity/2.0.6/util/analyze_blastPlus_topHit_coverage.pl blastx.outfmt6 Trinity.fasta /cm/shared/apps/blast/databases/uniprot_sprot_Sep2018.fasta
+[amali010@turing1 testassembly]$ sbatch AMBlastparse.sh
+Submitted batch job 9276474
+[amali010@turing1 testassembly]$ squeue -u amali010
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+           9276474      main AMBlastp amali010 PD       0:00      1 (Priority)
+[amali010@turing1 testassembly]$ squeue -u amali010
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+           9276474      main AMBlastp amali010  R       0:14      1 coreV3-23-040
+
+[amali010@turing1 testassembly]$ cat blastx.outfmt6.hist
+#hit_pct_cov_bin        count_in_bin    >bin_below
+100     143     143
+90      52      195
+80      77      272
+70      87      359
+60      110     469
+50      133     602
+40      219     821
+30      395     1216
+20      726     1942
+10      674     2616
+
+#2 - rm UNSORTED.bam's from your QCFastqs directory (or wherever your .bams and .sams are)
+[amali010@turing1 QCFastqs]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq/QCFastqs
+[amali010@turing1 QCFastqs]$ cat AMrmunsortbam.sh
+#!/bin/bash -l
+
+#SBATCH -o AMrmunsortbam.txt
+#SBATCH -n 1
+#SBATCH --mail-user=amali010@odu.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=AMrmunsortbam
+
+rm *UNSORTED.bam
+[amali010@turing1 QCFastqs]$ sbatch AMrmunsortbam.sh
+Submitted batch job 9276485
+[amali010@turing1 QCFastqs]$ squeue -u amali010
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+           9276485      main AMrmunso amali010  R       0:01      1 coreV3-23-046
+
+#2a - look at one of your files using sam tools
+[amali010@turing1 QCFastqs]$ salloc
+salloc: Pending job allocation 9276494
+[amali010@coreV3-23-031 QCFastqs]$ enable_lmod
+[amali010@coreV3-23-031 QCFastqs]$ module load samtools
+[amali010@coreV3-23-031 QCFastqs]$ samtools tview RI_W_07_14_clippedtrimmed.fastq.bam /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/refassembly/15079_Apoc_hostsym.fasta
+1         11        21        31        41        51        61        71
+TCAGGACCAAGTCCACTCATGATCGGAAGAGAAAACTTCTTTTTGGGATCGAATGGCCGGGCTCCAGACTTAGATATTAT
+                                                        ........................
+                                                        ........................
+
+[amali010@coreV3-23-031 QCFastqs]$ samtools tview -p 'TR78|c0_g2_i1_coral' RI_W_07_14_clippedtrimmed.fastq.bam /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/refassembly/15079_Apoc_hostsym.fasta
+1         11        21        31        41        51        61        71
+TCAGGACCAAGTCCACTCATGATCGGAAGAGAAAACTTCTTTTTGGGATCGAATGGCCGGGCTCCAGACTTAGATATTAT
+                                                        ........................
+                                                        ........................
+
+#3 - run the following to start genotyping your SNPs for filtering next week
+[amali010@coreV3-23-031 QCFastqs]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq/QCFastqs
+[amali010@coreV3-23-031 QCFastqs]$ cat AMfreebayessubref.sh
+#!/bin/bash -l
+
+#SBATCH -o AMfreebayessubref.txt
+#SBATCH -n 1
+#SBATCH --mail-user=amali010.edu
+#SBATCH --mail-type=END
+#SBATCH --job-name=AMfreebayessubref
+
+enable_lmod
+module load dDocent
+freebayes --genotype-qualities -f /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/refassembly/15079_Apoc_hostsym.fasta *.fastq.bam > AMmergedfastqs.vcf
+[amali010@coreV3-23-031 QCFastqs]$ sbatch AMfreebayessubref.sh
+Submitted batch job 9276571
+[amali010@coreV3-23-031 QCFastqs]$ squeue -u amali010
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+           9276571      main AMfreeba amali010  R       0:02      1 coreV3-23-002
+           9276494      main       sh amali010  R      58:02      1 coreV3-23-031
+
+#4 - submit and add everything to your logfile
+git add README.md
+git commit -m 'updating readme'
+git push -u origin main
 ```
