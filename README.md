@@ -1248,12 +1248,31 @@ TCAGGACCAAGTCCACTCATGATCGGAAGAGAAAACTTCTTTTTGGGATCGAATGGCCGGGCTCCAGACTTAGATATTAT
 enable_lmod
 module load dDocent
 freebayes --genotype-qualities -f /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/refassembly/15079_Apoc_hostsym.fasta *.fastq.bam > AMmergedfastqs.vcf
+[amali010@coreV3-23-031 QCFastqs]$ ls *.fastq.bam
+RI_B_06_18_clippedtrimmed.fastq.bam  VA_B_06_18_clippedtrimmed.fastq.bam
+RI_B_07_14_clippedtrimmed.fastq.bam  VA_B_07_14_clippedtrimmed.fastq.bam
+RI_B_07_18_clippedtrimmed.fastq.bam  VA_B_07_18_clippedtrimmed.fastq.bam
+RI_B_07_22_clippedtrimmed.fastq.bam  VA_B_07_22_clippedtrimmed.fastq.bam
+RI_W_06_18_clippedtrimmed.fastq.bam  VA_W_06_18_clippedtrimmed.fastq.bam
+RI_W_07_14_clippedtrimmed.fastq.bam  VA_W_07_14_clippedtrimmed.fastq.bam
+RI_W_07_18_clippedtrimmed.fastq.bam  VA_W_07_18_clippedtrimmed.fastq.bam
+RI_W_07_22_clippedtrimmed.fastq.bam  VA_W_07_22_clippedtrimmed.fastq.bam
+[amali010@coreV3-23-031 QCFastqs]$ ls *.bam
+RI_B_06_18_clippedtrimmed.fastq.bam  VA_B_06_18_clippedtrimmed.fastq.bam
+RI_B_07_14_clippedtrimmed.fastq.bam  VA_B_07_14_clippedtrimmed.fastq.bam
+RI_B_07_18_clippedtrimmed.fastq.bam  VA_B_07_18_clippedtrimmed.fastq.bam
+RI_B_07_22_clippedtrimmed.fastq.bam  VA_B_07_22_clippedtrimmed.fastq.bam
+RI_W_06_18_clippedtrimmed.fastq.bam  VA_W_06_18_clippedtrimmed.fastq.bam
+RI_W_07_14_clippedtrimmed.fastq.bam  VA_W_07_14_clippedtrimmed.fastq.bam
+RI_W_07_18_clippedtrimmed.fastq.bam  VA_W_07_18_clippedtrimmed.fastq.bam
+RI_W_07_22_clippedtrimmed.fastq.bam  VA_W_07_22_clippedtrimmed.fastq.bam
 [amali010@coreV3-23-031 QCFastqs]$ sbatch AMfreebayessubref.sh
 Submitted batch job 9276571
 [amali010@coreV3-23-031 QCFastqs]$ squeue -u amali010
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
            9276571      main AMfreeba amali010  R       0:02      1 coreV3-23-002
            9276494      main       sh amali010  R      58:02      1 coreV3-23-031
+
 
 #4 - submit and add everything to your logfile
 git add README.md
