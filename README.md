@@ -4,23 +4,22 @@
 * Exercise day02
 ```sh
 
-#1 - logon to the cluster @turing.hpc.odu.edu
+#1 - Log on to the cluster @turing.hpc.odu.edu
 [amali010@turing1 ~]$ ls
 data  exercises  hpc-intro
 
-#2 - make a directory in your course workspace called data
+#2 - Make a directory in your course workspace called data
 [amali010@turing1 ~]$ mkdir data
 
-#3 - make a directory called exercises in your data directory
+#3 - Make a directory called exercises in your data directory
 [amali010@turing1 data]$ mkdir exercises
 
-#4 - execute a pwd command and start a log of your commands with a 
+#4 - Execute a pwd command and start a log of your commands with a 
 header for today's date in your README.md github logfile in your workspace
 [amali010@turing1 exercises]$ pwd
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/exercises 
 
-#5 - cp the Exercise2.fasta.gz and Exercise2.fastq.tar.gz files into your 
-exercises directory from the /cm/shared/courses/dbarshis/21AdvGenomics/assignments_exercises/day02 directory
+#5 - cp the Exercise2.fasta.gz and Exercise2.fastq.tar.gz files into your exercises directory from the /cm/shared/courses/dbarshis/21AdvGenomics/assignments_exercises/day02 directory
 [amali010@turing1 exercises]$ cp /cm/shared/courses/dbarshis/21AdvGenomics/assignments_exercises/day02/Exercise2.fast* ./
 [amali010@turing1 exercises]$ ls
 Exercise2_djb.fasta.gz  Exercise2.fasta.gz  Exercise2.fastq.tar.gz
@@ -34,7 +33,7 @@ drwxrwxrwx 4 amali010 users  188 Jan 28 17:31 ..
 -rw-r--r-- 1 amali010 users  18M Sep  2  2015 Exercise2.fastq
 -rwxr-xr-x 1 dbarshis users 4.3M Jan 22 13:51 Exercise2.fastq.tar.gz
 
-#6 - unzip and untar the files
+#6 - Unzip and untar the files
 [amali010@turing1 exercises]$ gunzip -c Exercise2_djb.fasta.gz > Exercise2.fasta
 [amali010@turing1 exercises]$ ls
 Exercise2_djb.fasta.gz  Exercise2.fasta  Exercise2.fastq  Exercise2.fastq.tar.gz
@@ -59,11 +58,10 @@ drwxrwxrwx 4 amali010 users  188 Jan 28 17:31 ..
 -rw-r--r-- 1 amali010 users  18M Sep  2  2015 Exercise2.fastq
 -rwxr-xr-x 1 dbarshis users 4.3M Jan 22 13:51 Exercise2.fastq.tar.gz
 
-#7 - add these commands to your notebook
+#7 - Add these commands to your notebook
 Done
 
-#8 - calculate how many sequences are in each file and add these 
-results to your notebook file
+#8 - Calculate how many sequences are in each file and add these results to your notebook file
 [amali010@turing1 exercises]$ head -1 Exercise2.fasta
 >scaffold10078|size20675
 [amali010@turing1 exercises]$ grep -c '>' Exercise2.fasta
@@ -77,8 +75,7 @@ results to your notebook file
 [amali010@turing1 exercises]$ echo 245216/4 | bc -l
 61304.00000000000000000000
 
-#9 - cp the avg_cov_len_fasta_advbioinf.py from the
- /cm/shared/courses/dbarshis/21AdvGenomics/scripts directory into your class scripts directory
+#9 - cp the avg_cov_len_fasta_advbioinf.py from the /cm/shared/courses/dbarshis/21AdvGenomics/scripts directory into your class scripts directory
 [amali010@turing1 exercises]$ cp /cm/shared/courses/dbarshis/21AdvGenomics/scripts/avg_cov_len_fasta_advbioinf.py ../scripts/
 cp: cannot create regular file `../scripts/': Is a directory
 [amali010@turing1 exercises]$ cp /cm/shared/courses/dbarshis/21AdvGenomics/scripts/avg_cov_len_fasta_advbioinf.py ../../scripts/
@@ -91,17 +88,14 @@ am_exercise1.txt  data  day03  groundrules.txt  scripts
 avg_cov_len_fasta_advbioinf.py  Trimclipfilterstatsbatch_advbioinf.py
 renamer_advbioinf.py
 
-#10 - start an interactive compute session and re-navigate 
-to your exercises directory
+#10 - Start an interactive compute session and re-navigate to your exercises directory
 [amali010@turing1 exercises]$ salloc
 salloc: Pending job allocation 9271058
 salloc: job 9271058 queued and waiting for resources
 salloc: job 9271058 has been allocated resources
 salloc: Granted job allocation 9271058
 
-#11 - run the avg_cov_len_fasta_DJB.py script on your 
-Exercise2.fasta file by typing the path to the script followed 
-by the Exercise2.fasta file name
+#11 - Run the avg_cov_len_fasta_DJB.py script on your Exercise2.fasta file by typing the path to the script followed by the Exercise2.fasta file name
 [amali010@coreV2-22-007 exercises]$ ../../scripts/avg_cov_len_fasta_advbioinf.py Exercise2.fasta
 The total number of sequences is 138
 The average sequence length is 126640
@@ -115,11 +109,10 @@ contigs >= 500bp = 138
 contigs >= 1000bp = 138
 contigs >= 2000bp = 135
 
-#12 - did you add all these entries to your notebook file, 
-including the results of the script?
+#12 - Did you add all these entries to your notebook file, including the results of the script?
 Yes!
 
-#13 - push your notebook file to your github page
+#13 - Push your notebook file to your github page
 git add README.md
 git commit -m 'updating readme'
 git push -u origin main
@@ -128,7 +121,7 @@ git push -u origin main
 ##Day 03 27-Jan-2021
 * Homework day02 (originally meant for 22-Jan-2021 but done on 27-Jan-2021)
 ```sh
-#1 - write an sbatch script to cp the files /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/originalfastqs/ into your own data directory
+#1 - Write an sbatch script to cp the files /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/originalfastqs/ into your own data directory
    Kristina-HADB01
    Ivan-HADB02
    KatieP-HADB03
@@ -142,7 +135,7 @@ git push -u origin main
 [amali010@coreV2-25-072 data]$ pwd
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data
 
-#2 - add the content of your sbatch script to your logfile
+#2 - Add the content of your sbatch script to your logfile
 [amali010@coreV2-25-072 data]$ cat AMCopyLane06.sh
 #!/bin/bash -l
 
@@ -154,16 +147,14 @@ git push -u origin main
 
 cp /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/originalfastqs/HADB06*.fastq.gz /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data
 
-#3 - submit the slurm script (sbatch scripname.sh) and verify 
-that it's working (by squeue -u yourusername multiple times and 
-checking the destination directory to make sure the files are being created)
+#3 - Submit the slurm script (sbatch scripname.sh) and verify that it's working (by squeue -u yourusername multiple times and checking the destination directory to make sure the files are being created)
 [amali010@coreV2-25-072 data]$ sbatch AMCopyLane06.sh
 Submitted batch job 9270443
 
-#4 - make sure this is all documented on your github notebook
+#4 - Make sure this is all documented on your github notebook
 Done
 
-#5 - write a sbatch script to gunzip all the fastq.gz files
+#5 - Write a sbatch script to gunzip all the fastq.gz files
 [amali010@coreV2-25-072 data]$ pwd
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data
 [amali010@coreV2-25-072 data]$ cat AMGunzipLane06.sh
@@ -180,7 +171,7 @@ gunzip *.fastq.gz
 [amali010@coreV2-25-072 data]$ sbatch AMGunzipLane06.sh
 Submitted batch job 9270466
 
-#6 - push your notebook file to your github page
+#6 - Push your notebook file to your github page
 git add README.md
 git commit -m 'updating readme'
 git push -u origin main
@@ -192,8 +183,7 @@ git push -u origin main
 [amali010@turing1 areej]$ pwd
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej
 
-#1 - cp the /cm/shared/courses/dbarshis/21AdvGenomics/assignments_exercises/day03 directory 
-(and files) to your sandbox
+#1 - cp the /cm/shared/courses/dbarshis/21AdvGenomics/assignments_exercises/day03 directory (and files) to your sandbox
 [amali010@turing1 areej]$ cp -r /cm/shared/courses/dbarshis/21AdvGenomics/assignments_exercises/day03 ./
 
 #2 - mkdir a fastq directory in your data directory and mv all the .fastq files into this directory
@@ -203,9 +193,7 @@ git push -u origin main
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data
 [amali010@turing1 data]$ mv *.fastq ./fastq/
 
-#3 - cp the renamingtable_complete.txt from the day03 directory into your fastq directory and 
-the /cm/shared/courses/dbarshis/21AdvGenomics/scripts/renamer_advbioinf.py script into your 
-sandbox scripts folder and less the new script and check out the usage statement
+#3 - cp the renamingtable_complete.txt from the day03 directory into your fastq directory and the /cm/shared/courses/dbarshis/21AdvGenomics/scripts/renamer_advbioinf.py script into your  sandbox scripts folder and less the new script and check out the usage statement
 [amali010@turing1 data]$ cp ../day03/renamingtable_complete.txt ./fastq/
 [amali010@turing1 data]$ cp /cm/shared/courses/dbarshis/21AdvGenomics/scripts/renamer_advbioinf.py ../scripts/
 [amali010@turing1 data]$ head ../scripts/renamer_advbioinf.py
@@ -213,8 +201,7 @@ sandbox scripts folder and less the new script and check out the usage statement
 ####usage renamer.py renamingtable
 #### this script take the entries in the first column of table and renames (mv's) them to files with the names in the second column
 
-#4 - run the renamer_advbioinf.py script in your fastq folder using the renamingtable_complete.txt as 
-practice and verify the output to the screen by hand
+#4 - Run the renamer_advbioinf.py script in your fastq folder using the renamingtable_complete.txt as practice and verify the output to the screen by hand
 [amali010@turing1 data]$ cd fastq/
 [amali010@turing1 fastq]$ pwd
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq
@@ -316,16 +303,12 @@ mv HADB06-N_S110_L007_R1_001.fastq VA_B_07_18.fastq
 mv HADB06-O_S111_L007_R1_001.fastq RI_W_07_18.fastq
 mv HADB06-P_S112_L007_R1_001.fastq RI_B_07_18.fastq
 
-#5 - uncomment the last line of the renaming script in your scripts folder 
-that starts with os.popen and comment out the next to last line that starts 
-with print
+#5 - Uncomment the last line of the renaming script in your scripts folder that starts with os.popen and comment out the next to last line that starts with print
 [amali010@turing1 fastq]$ pwd
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq
 [amali010@turing1 fastq]$ nano ../../scripts/renamer_advbioinf.py
 
-#6 - write a sbatch script and submit it to rename all the .fastq files 
-according to the renaming table using 
-your renamer_advbioinf.py script
+#6 - Write a sbatch script and submit it to rename all the .fastq files according to the renaming table using your renamer_advbioinf.py script
 [amali010@turing1 fastq]$ pwd
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq
 [amali010@turing1 fastq]$ nano areejsrenamer.sh
@@ -345,7 +328,7 @@ Submitted batch job 9270936
 [amali010@turing1 fastq]$ squeue -u amali010
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
 
-#7 - make sure this is all documented on your github page
+#7 - Make sure this is all documented on your github page
 areej@DESKTOP-RF6VF4N MINGW64 ~/Desktop/BIOL_803_Advanced_Genomics_Data_Analysis/In_class/21sp_advgenomics/AreejsAdvancedGenomicsLog (main)
 $ git add README.md
 
@@ -367,13 +350,12 @@ To https://github.com/areejmalik/AreejsAdvancedGenomicsLog.git
    aa0237a..4326621  main -> main
 Branch 'main' set up to track remote branch 'main' from 'origin'.
 
-#8 - the naming convention for the files is as follows:
+#8 - The naming convention for the files is as follows:
 SOURCEPOPULATION_SYMBIOTICSTATE_GENOTYPE_TEMPERATURE.fastq
 There are 2 sources: Virginia and Rhode Island
 There are 2 symbiotic states: Brown and White
 	
-#9 - next, you're going to start the process of adapter clipping and quality 
-trimming all the renamed .fastq files in batches, by lane
+#9 - Next, you're going to start the process of adapter clipping and quality trimming all the renamed .fastq files in batches, by lane
 Ok!
 
 #10 - cp the script /cm/shared/courses/dbarshis/21AdvGenomics/scripts/Trimclipfilterstatsbatch_advbioinf.py into your scripts directory
@@ -381,7 +363,7 @@ Ok!
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data
 [amali010@coreV1-22-016 data]$ cp /cm/shared/courses/dbarshis/21AdvGenomics/scripts/
 
-#11 - less/head the new script and check out the usage statement
+#11 - Less/head the new script and check out the usage statement
 [amali010@coreV1-22-016 data]$ head -14 ../scripts/Trimclipfilterstatsbatch_advbioinf.py
 #!/usr/bin/env python
 # Written by Dan Barshis
@@ -403,7 +385,7 @@ into the working directory with your fastq files
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq
 [amali010@turing1 fastq]$ cp /cm/shared/courses/dbarshis/21AdvGenomics/assignments_exercises/day03/adapterlist_advbioinf.txt ./
 
-#13 - make a sbatch script for the Trimclipfilter... script and run it on your fastq files
+#13 - Make a sbatch script for the Trimclipfilter... script and run it on your fastq files
 [amali010@turing1 ~]$ salloc
 salloc: Pending job allocation 9270954
 salloc: job 9270954 queued and waiting for resources
@@ -479,9 +461,6 @@ FullTrimClip.sh             RI_W_07_22.fastq   VA_W_07_22.fastq
 renamingtable_complete.txt  Testing
 RI_B_06_18_clipped.fastq    trimclipstats.txt
 
-Note: need to know how to safely delete the extra files that were made
-while attempting to getting the script to run
-
 [amali010@turing1 fastq]$ squeue -u amali010
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
            9270966      main amTrimFu amali010  R       5:20      1 coreV1-22-005
@@ -492,7 +471,7 @@ while attempting to getting the script to run
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
            9270966      main amTrimFu amali010  R      17:31      1 coreV1-22-005
 
-#14 - push your notebook file to your github page
+#14 - Push your notebook file to your github page
 git add README.md
 git commit -m 'updating readme'
 git push -u origin main
@@ -508,11 +487,9 @@ Checked the success of the job submission from the day before
 [amali010@turing1 fastq]$ ls filteringstats/
 [amali010@turing1 fastq]$ ls -alh filteringstats/
 
-#1 - add your trimclipstats.txt output to the full class 
+#1 - Add your trimclipstats.txt output to the full class 
 
-#1a - run /cm/shared/courses/dbarshis/21AdvGenomics/scripts/Schafran_trimstatstable_advbioinf_clippedtrimmed.py -h 
-to examine usage datafile /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/Fulltrimclipstatstable.txt 
-using the following steps
+#1a - Run /cm/shared/courses/dbarshis/21AdvGenomics/scripts/Schafran_trimstatstable_advbioinf_clippedtrimmed.py -h to examine usage datafile /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/Fulltrimclipstatstable.txt using the following steps
 [amali010@turing1 fastq]$ pwd
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq
 [amali010@turing1 fastq]$ /cm/shared/courses/dbarshis/21AdvGenomics/scripts/Schafran_trimstatstable_advbioinf_clippedtrimmed.py -h
@@ -527,17 +504,16 @@ Options (-c and -v must be listed separately to run together):
 -c      Use comma delimiter instead of tabs
 -v      Verbose mode (print steps to stdout)
 
-#1b - run the script on your data with the outputfilename YOURNAME_trimclipstatsout.txt
+#1b - Run the script on your data with the outputfilename YOURNAME_trimclipstatsout.txt
 [amali010@turing1 fastq]$ /cm/shared/courses/dbarshis/21AdvGenomics/scripts/Schafran_trimstatstable_advbioinf_clippedtrimmed.py trimclipstats.txt AREEJ_trimclipstatsout.txt
 
-#1c -  add YOURNAME_trimclipstatsout.txt to the class file by running tail -n +2 YOURNAME_trimclipstatsout.txt >> /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/Fulltrimclipstatstable.txt
+#1c -  Add YOURNAME_trimclipstatsout.txt to the class file by running tail -n +2 YOURNAME_trimclipstatsout.txt >> /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/Fulltrimclipstatstable.txt
 [amali010@turing1 fastq]$ tail -n +2 AREEJ_trimclipstatsout.txt >> /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/Fulltrimclipstatstable.txt
 
-#2 - now we're going to map our reads back to our assembly using the bowtie2 alignment algorithm (starting to follow this pipeline https://github.com/bethsheets/SNPcalling_tutorial)
+#2 - Now we're going to map our reads back to our assembly using the bowtie2 alignment algorithm (starting to follow this pipeline https://github.com/bethsheets/SNPcalling_tutorial)
 Ok!
 
-#3 - write a sbatch script to do the following commands in sequence on 
-your _clippedtrimmedfilterd.fastq datafiles from your lane of data
+#3 - Write a sbatch script to do the following commands in sequence on your _clippedtrimmedfilterd.fastq datafiles from your lane of data
 [amali010@turing1 fastq]$ cd QCFastqs
 [amali010@turing1 QCFastqs]$ pwd
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq/QCFastqs
@@ -579,7 +555,7 @@ Submitted batch job 9271117
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
            9271117      main ambowtie amali010  R       5:07      1 coreV2-25-049
 
-#4 - submit and add everything to your logfile
+#4 - Submit and add everything to your logfile
 git add README.md
 git commit -m 'updating readme'
 git push -u origin main
@@ -588,17 +564,14 @@ git push -u origin main
 ##Day 05 03-Feb-2021
 * Exercise day05 
 ```sh
-#1 - team up with a partner for this one and work only on a combined set of 
-data for your two lanes of sequences
+#1 - Team up with a partner for this one and work only on a combined set of data for your two lanes of sequences
 Partner: Andrew
 Combined set of data lanes: 1, 6, & 7
 
-#2 - run the Trinity denovo assembler on your clippedtrimmed.fastq files for 
-your two lanes together
+#2 - Run the Trinity denovo assembler on your clippedtrimmed.fastq files for your two lanes together
 Done!
 
-#3 - modify the below sbatch script (note the differences in the header 
-compared to the previous one)
+#3 - Modify the below sbatch script (note the differences in the header compared to the previous one)
 Original script (used from homework_day05.txt file)
 
 Edited script
@@ -618,10 +591,10 @@ module load container_env trinity
 
 crun Trinity --seqType fq --max_memory 768G --normalize_reads --single RI_B_01_14_clippedtrimmed.fastq,RI_W_06_18_clippedtrimmed.fastq,VA_B_07_22_clippedtrimmed.fastq,RI_B_01_18_clippedtrimmed.fastq,RI_W_07_14_clippedtrimmed.fastq,VA_B_09_SNP_clippedtrimmed.fastq,RI_B_01_22_clippedtrimmed.fastq,RI_W_07_18_clippedtrimmed.fastq,VA_W_01_14_clippedtrimmed.fastq,RI_B_06_18_clippedtrimmed.fastq,RI_W_07_22_clippedtrimmed.fastq,VA_W_01_18_clippedtrimmed.fastq,RI_B_07_14_clippedtrimmed.fastq,RI_W_08_SNP_clippedtrimmed.fastq,VA_W_01_22_clippedtrimmed.fastq,RI_B_07_18_clippedtrimmed.fastq,VA_B_01_14_clippedtrimmed.fastq,VA_W_06_18_clippedtrimmed.fastq,RI_B_07_22_clippedtrimmed.fastq,VA_B_01_18_clippedtrimmed.fastq,VA_W_07_14_clippedtrimmed.fastq,RI_B_08_SNP_clippedtrimmed.fastq,VA_B_01_22_clippedtrimmed.fastq,VA_W_07_18_clippedtrimmed.fastq,RI_W_01_14_clippedtrimmed.fastq,VA_B_06_18_clippedtrimmed.fastq,VA_W_07_22_clippedtrimmed.fastq,RI_W_01_18_clippedtrimmed.fastq,VA_B_07_14_clippedtrimmed.fastq,VA_W_08_SNP_clippedtrimmed.fastq,RI_W_01_22_clippedtrimmed.fastq,VA_B_07_18_clippedtrimmed.fastq --CPU 32
 
-#4 - check https://trinityrnaseq.github.io/ for usage info
+#4 - Check https://trinityrnaseq.github.io/ for usage info
 Done!
 
-#5 - submit your trinity script
+#5 - Submit your trinity script
 Note: It was done by Andrew, so the following is from his notebook.
 [apear012@turing1 apam]$ pwd
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/apearson/data/fastq/QCFastqs/apam
@@ -664,7 +637,7 @@ Submitted batch job 9272385
            9272357      main       sh apear012  R    1:15:39      1 coreV2-22-007 
            9272385     himem APAMAsse apear012  R       0:14      1 coreV4-21-himem-003
            
-#6 - submit and add everything to your logfile
+#6 - Submit and add everything to your logfile
 git add README.md
 git commit -m 'updating readme'
 git push -u origin main
@@ -676,9 +649,7 @@ No homework
 ##Day 06 05-Feb-2021
 *  Exercise day06 
 ```sh
-#1 - start an interactive session via salloc and run 
-the /cm/shared/apps/trinity/2.0.6/util/TrinityStats.pl script on your 
-Trinity.fasta output from your assembly
+#1 - Start an interactive session via salloc and run the /cm/shared/apps/trinity/2.0.6/util/TrinityStats.pl script on your Trinity.fasta output from your assembly
 [amali010@turing1 djbtestassembly]$ salloc
 salloc: Pending job allocation 9272860
 salloc: job 9272860 queued and waiting for resources
@@ -726,9 +697,7 @@ Stats based on ALL transcript contigs:
         Average contig: 347.72
         Total assembled bases: 7295061
 
-#2 - compare this with the output from avg_cov_len_fasta_advbioinf.py on 
-our class reference assembly (/cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/refassembly/15079_Apoc_hostsym.fasta) 
-and add both to your logfile
+#2 - Compare this with the output from avg_cov_len_fasta_advbioinf.py on our class reference assembly (/cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/refassembly/15079_Apoc_hostsym.fasta) and add both to your logfile
 [amali010@coreV2-22-007 djbtestassembly]$ /cm/shared/courses/dbarshis/21AdvGenomics/scripts/avg_cov_len_fasta_advbioinf.py /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/refassembly/15079_Apoc_hostsym.fasta
 The total number of sequences is 15079
 The average sequence length is 876
@@ -742,10 +711,9 @@ contigs >= 500bp = 15079
 contigs >= 1000bp = 3660
 contigs >= 2000bp = 536
 
-#3 - less or head your bowtie2 job output file to look at your alignment 
-statistics and calculate the following from the information:
+#3 - Less or head your bowtie2 job output file to look at your alignment statistics and calculate the following from the information:
 
-#3a - the mean percent "overall alignment rate"
+#3a - The mean percent "overall alignment rate"
 [amali010@coreV2-22-007 QCFastqs]$ less ambowtie2.txt
 [amali010@turing1 QCFastqs]$ pwd
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq/QCFastqs
@@ -785,7 +753,7 @@ statistics and calculate the following from the information:
 1.70
 1.41
 
-#3b - the mean percent reads "aligned exactly 1 time"
+#3b - The mean percent reads "aligned exactly 1 time"
 [amali010@coreV2-22-007 QCFastqs]$ grep "aligned exactly 1 time" ambowtie2.txt
     312173 (1.32%) aligned exactly 1 time
     279609 (1.10%) aligned exactly 1 time
@@ -822,7 +790,7 @@ statistics and calculate the following from the information:
 0.87
 0.89
 
-#3c - the mean number of reads "aligned exactly 1 time"
+#3c - The mean number of reads "aligned exactly 1 time"
 [amali010@turing1 QCFastqs]$ grep "aligned exactly 1 time" ambowtie2.txt
     312173 (1.32%) aligned exactly 1 time
     279609 (1.10%) aligned exactly 1 time
@@ -859,7 +827,7 @@ statistics and calculate the following from the information:
 176134
 243143
 
-#3d - the mean percent reads "aligned >1 times"
+#3d - The mean percent reads "aligned >1 times"
 [amali010@coreV2-22-007 QCFastqs]$ grep "aligned >1 times" ambowtie2.txt
     131960 (0.56%) aligned >1 times
     109989 (0.43%) aligned >1 times
@@ -897,9 +865,7 @@ statistics and calculate the following from the information:
 0.52
 hint use grep and paste into excel
 
-#4 - add your statistics as single rows to the shared table 
-/cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/alignmentstatstable.txt as tab-delimited text 
-in the following order:
+#4 - Add your statistics as single rows to the shared table /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/alignmentstatstable.txt as tab-delimited text in the following order:
 LaneX_yourinitials	b-the mean percent "overall alignment rate"	c-the mean percent reads "aligned exactly 1 time"	d-the mean number of reads "aligned exactly 1 time"	e-the mean percent reads "aligned >1 times"
 [amali010@turing1 QCFastqs]$ pwd
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq/QCFastqs
@@ -916,10 +882,8 @@ Lane4_KCrid     2.48    1.30    289072.88       1.18
 LaneX_am 1.670625       1.098125        222342.5625     0.573125
 
 #5 - Data cleanup and archiving:
-#5a - mv your Trinity.fast file from your trinity_out_dir to a folder 
-called testassembly in your data directory
-Note: our job was still running at the time. So to avoid confusion I decided to
-work with the Trinity.fasta file that was copied into my data directory during class.
+#5a - mv your Trinity.fast file from your trinity_out_dir to a folder called testassembly in your data directory
+Note: our job was still running at the time. So to avoid confusion I decided to work with the Trinity.fasta file that was copied into my data directory during class.
 [amali010@turing1 data]$ mkdir testassembly
 [amali010@turing1 data]$ cd djbtestassembly/
 [amali010@turing1 djbtestassembly]$ ls
@@ -928,7 +892,7 @@ Trinity.fasta
 [amali010@turing1 testassembly]$ ls
 Trinity.fasta
 
-#5b - set up a sbatch script to:
+#5b - Set up a sbatch script to:
 	rm -r YOURtrinity_out_dir (don't have one so this will be skipped in the sbatch script)
 	rm -r YOURoriginalfastqs
 	rm -r YOURfilterstats # as long as you've already appended your filteringstats output to the class as part of homework_day04.txt
@@ -970,7 +934,7 @@ Submitted batch job 9273090
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
            9273090      main AMCleanu amali010  R       0:01      1 coreV2-22-007
 
-#6 - submit a blast against sprot from your testassembly folder using the following command
+#6 - Submit a blast against sprot from your testassembly folder using the following command:
 #!/bin/bash -l
 
 #SBATCH -o OUTFILENAME.txt
@@ -1009,7 +973,7 @@ Submitted batch job 9273094
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
            9273094      main  AMBlast amali010  R      58:38      1 coreV2-22-028
 
-#7 - head one of your .sam files to look at the header
+#7 - Head one of your .sam files to look at the header
 [amali010@turing1 QCFastqs]$ pwd
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq/QCFastqs
 [amali010@turing1 QCFastqs]$ head RI_B_06_18_clippedtrimmed.fastq.sam
@@ -1057,7 +1021,7 @@ JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJFFFAA     AS:i:-29        XN:i:0  
 
 Header lines include '@'. The -v in grep -v excludes '@' and therefore the header lines as well.
 
-#9 - in an interactive session run /cm/shared/courses/dbarshis/21AdvGenomics/scripts/get_explain_sam_flags_advbioinf.py on 2-3 of your .sam files using * to select 2-3 at the same time.
+#9 - In an interactive session run /cm/shared/courses/dbarshis/21AdvGenomics/scripts/get_explain_sam_flags_advbioinf.py on 2-3 of your .sam files using * to select 2-3 at the same time.
 [amali010@turing1 QCFastqs]$ /cm/shared/courses/dbarshis/21AdvGenomics/scripts/get_explain_sam_flags_advbioinf.py RI_B_06_18_clippedtrimmed.fastq.sam RI_B_07_18_clippedtrimmed.fastq.sam RI_W_07_18_clippedtrimmed.fastq.sam
 RI_B_06_18_clippedtrimmed.fastq.sam
 ['0', '272', '256', '16']
@@ -1152,7 +1116,7 @@ git push -u origin main
 ##Day 07 10-Feb-2021
 *  Exercise day07 
 ```sh
-#1 - run the following command on your sprot output file to process into the contig length/match format that trinity examines
+#1 - Run the following command on your sprot output file to process into the contig length/match format that trinity examines
 #!/bin/bash -l
 
 #SBATCH -o OUTFILE.TXT
@@ -1216,7 +1180,7 @@ Submitted batch job 9276485
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
            9276485      main AMrmunso amali010  R       0:01      1 coreV3-23-046
 
-#2a - look at one of your files using sam tools
+#2a - Look at one of your files using sam tools
 [amali010@turing1 QCFastqs]$ salloc
 salloc: Pending job allocation 9276494
 [amali010@coreV3-23-031 QCFastqs]$ enable_lmod
@@ -1233,7 +1197,7 @@ TCAGGACCAAGTCCACTCATGATCGGAAGAGAAAACTTCTTTTTGGGATCGAATGGCCGGGCTCCAGACTTAGATATTAT
                                                         ........................
                                                         ........................
 
-#3 - run the following to start genotyping your SNPs for filtering next week
+#3 - Run the following to start genotyping your SNPs for filtering next week
 [amali010@coreV3-23-031 QCFastqs]$ pwd
 /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq/QCFastqs
 [amali010@coreV3-23-031 QCFastqs]$ cat AMfreebayessubref.sh
@@ -1274,8 +1238,150 @@ Submitted batch job 9276571
            9276494      main       sh amali010  R      58:02      1 coreV3-23-031
 
 
-#4 - submit and add everything to your logfile
+#4 - Submit and add everything to your logfile
 git add README.md
 git commit -m 'updating readme'
 git push -u origin main
+```
+
+##Day 08 12-Feb-2021
+*  Exercise day08
+```sh
+#1 - Clean up your data directory by:
+#1a - Make a SAMS folder and mv all your .sam files into that directory
+[amali010@turing1 QCFastqs]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq/QCFastqs
+[amali010@turing1 QCFastqs]$ mkdir ../../SAMS
+[amali010@turing1 QCFastqs]$ ls *.sam
+[amali010@turing1 QCFastqs]$ mv *.sam ../../SAMS/
+
+#1b - Make a BAMS folder and mv all your .bam files and .bam.bai files into that directory
+[amali010@turing1 QCFastqs]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq/QCFastqs
+[amali010@coreV3-23-003 QCFastqs]$ mkdir ../../BAMS
+[amali010@coreV3-23-003 QCFastqs]$ ls *.bam *.bam.bai
+[amali010@coreV3-23-003 QCFastqs]$ mv *bam *bam.bai ../../BAMS/
+
+#1c - rm your _unfiltered.vcf files if you have any
+I did not do this because I didn't have any.
+
+#1d - rm your .fastq files
+[amali010@turing1 QCFastqs]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq/QCFastqs
+[amali010@turing1 QCFastqs]$ rm *.fastq
+
+#1e - Make a VCF folder in your data directory and mv your YOURNAMEmergedfastqs.vcf into this directory (if your freebayes job didn't complete then skip this step)
+I did this even though I do not have a 'YOURNAMEmergedfastqs.vcf' file from the job that submitted in the previous class.
+[amali010@coreV2-22-013 QCFastqs]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq/QCFastqs
+[amali010@coreV3-23-003 QCFastqs]$ mkdir ../../VCF
+
+#2 - Start an interactive session via salloc
+[amali010@coreV2-22-013 QCFastqs]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/fastq/QCFastqs
+[amali010@turing1 QCFastqs]$ salloc
+salloc: Pending job allocation 9278251
+salloc: job 9278251 queued and waiting for resources
+salloc: job 9278251 has been allocated resources
+salloc: Granted job allocation 9278251
+
+#3 - cp the /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/VCF/mergedfastq_HEAAstrangiaAssembly.vcf to your VCF folder
+[amali010@coreV2-22-013 VCF]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/VCF
+[amali010@coreV2-22-013 VCF]$ cp /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/VCF/mergedfastq_HEAAstrangiaAssembly.vcf ./
+[amali010@coreV2-22-013 VCF]$ ls -alh
+total 2.1G
+drwxrwxrwx 2 amali010 users   54 Feb 12 12:59 .
+drwxrwxrwx 9 amali010 users  316 Feb 12 12:56 ..
+-rwxr-xr-x 1 amali010 users 1.5G Feb 12 12:59 mergedfastq_HEAAstrangiaAssembly.vcf
+
+
+#4 - Determine the number of individuals and variant sites in the class vcf file (and yours if it worked) using:
+/cm/shared/apps/vcftools/0.1.12b/bin/vcftools --vcf mergedfastq_HEAAstrangiaAssembly.vcf
+
+I did it with the class vcf file since I didn't have one of my own.
+
+[amali010@coreV2-22-013 VCF]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/VCF
+[amali010@coreV2-22-013 VCF]$ enable_lmod
+[amali010@coreV2-22-013 VCF]$ module load dDocent
+[amali010@coreV2-22-013 VCF]$ vcftools
+
+VCFtools (0.1.14)
+© Adam Auton and Anthony Marcketta 2009
+
+Process Variant Call Format files
+
+For a list of options, please go to:
+        https://vcftools.github.io/man_latest.html
+
+Alternatively, a man page is available, type:
+        man vcftools
+
+Questions, comments, and suggestions should be emailed to:
+        vcftools-help@lists.sourceforge.net
+
+[amali010@coreV2-22-013 VCF]$ vcftools --vcf mergedfastq_HEAAstrangiaAssembly.vcf
+
+VCFtools - 0.1.14
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+        --vcf mergedfastq_HEAAstrangiaAssembly.vcf
+
+After filtering, kept 40 out of 40 Individuals
+After filtering, kept 1214003 out of a possible 1214003 Sites
+Run Time = 14.00 seconds
+
+#5 - cp the /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/VCF/GoodCoralGenelistForVCFSubsetter.txt into your directory with your .vcf files
+[amali010@coreV2-22-013 VCF]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/VCF
+[amali010@coreV2-22-013 VCF]$ cp /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/VCF/GoodCoralGenelistForVCFSubsetter.txt  ./
+
+#6 - Run our host vcf extractor on your merged vcf file using the following syntax:
+/cm/shared/courses/dbarshis/21AdvGenomics/scripts/21Sp_vcfsubsetter_advbioinf.py GoodCoralGenelistForVCFSubsetter.txt mergedfastq_HEAAstrangiaAssembly.vcf
+[amali010@coreV2-22-013 VCF]$ /cm/shared/courses/dbarshis/21AdvGenomics/scripts/21Sp_vcfsubsetter_advbioinf.py GoodCoralGenelistForVCFSubsetter.txt mergedfastq_HEAAstrangiaAssembly.vcf
+Read in ContigList
+
+#7 - Compare the number of variant sites in your three files (YOURNAMEmergedfastqs.vcf,  mergedfastq_HEAAstrangiaAssembly.vcf, and  mergedfastq_HEAAstrangiaAssembly_subset.vcf) using:
+/cm/shared/apps/vcftools/0.1.12b/bin/vcftools --vcf
+
+I did not have a .vcf file of my own for comparison. So I compared the other two files in the parenthesis.
+
+[amali010@turing1 VCF]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/VCF
+[amali010@turing1 VCF]$ vcftools --vcf mergedfastq_HEAAstrangiaAssembly.vcf
+vcftools: Command not found.
+[amali010@turing1 VCF]$ enable_lmod
+[amali010@turing1 VCF]$ module load dDocent
+[amali010@turing1 VCF]$ vcftools --vcf mergedfastq_HEAAstrangiaAssembly.vcf
+
+VCFtools - 0.1.14
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+        --vcf mergedfastq_HEAAstrangiaAssembly.vcf
+
+After filtering, kept 40 out of 40 Individuals
+After filtering, kept 1214003 out of a possible 1214003 Sites
+Run Time = 11.00 seconds
+
+[amali010@turing1 VCF]$ vcftools --vcf mergedfastq_HEAAstrangiaAssembly_subset.vcf
+
+VCFtools - 0.1.14
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+        --vcf mergedfastq_HEAAstrangiaAssembly_subset.vcf
+
+After filtering, kept 40 out of 40 Individuals
+After filtering, kept 432676 out of a possible 432676 Sites
+Run Time = 6.00 seconds
+
+#8 - 8- Work through the VCF filtering tutorial until the following step:
+
+Now that we have a list of individuals to remove, we can feed that directly into VCFtools for filtering.
+
+vcftools --vcf raw.g5mac3dp3.recode.vcf --remove lowDP.indv --recode --recode-INFO-all --out raw.g5mac3dplm
+
 ```
