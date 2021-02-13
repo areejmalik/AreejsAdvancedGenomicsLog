@@ -1378,7 +1378,7 @@ After filtering, kept 40 out of 40 Individuals
 After filtering, kept 432676 out of a possible 432676 Sites
 Run Time = 6.00 seconds
 
-#8 - 8- Work through the VCF filtering tutorial until the following step:
+#8 - Work through the VCF filtering tutorial until the following step:
 
 Now that we have a list of individuals to remove, we can feed that directly into VCFtools for filtering.
 
