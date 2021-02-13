@@ -1383,5 +1383,145 @@ Run Time = 6.00 seconds
 Now that we have a list of individuals to remove, we can feed that directly into VCFtools for filtering.
 
 vcftools --vcf raw.g5mac3dp3.recode.vcf --remove lowDP.indv --recode --recode-INFO-all --out raw.g5mac3dplm
+[amali010@turing1 VCF]$ vcftools --vcf mergedfastq_HEAAstrangiaAssembly_subset.vcf --max-missing 0.5 --mac 3 --minQ 30 --recode --recode-INFO-all --out raw.g5mac3
 
+VCFtools - 0.1.14
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+        --vcf mergedfastq_HEAAstrangiaAssembly_subset.vcf
+        --recode-INFO-all
+        --mac 3
+        --minQ 30
+        --max-missing 0.5
+        --out raw.g5mac3
+        --recode
+
+After filtering, kept 40 out of 40 Individuals
+Outputting VCF file...
+After filtering, kept 99853 out of a possible 432676 Sites
+Run Time = 33.00 seconds
+
+[amali010@turing1 VCF]$ vcftools --vcf raw.g5mac3.recode.vcf --minDP 3 --recode --recode-INFO-all --out raw.g5mac3dp3
+
+VCFtools - 0.1.14
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+        --vcf raw.g5mac3.recode.vcf
+        --recode-INFO-all
+        --minDP 3
+        --out raw.g5mac3dp3
+        --recode
+
+After filtering, kept 40 out of 40 Individuals
+Outputting VCF file...
+After filtering, kept 99853 out of a possible 99853 Sites
+Run Time = 31.00 seconds
+
+[amali010@turing1 VCF]$ vcftools --vcf raw.g5mac3dp3.recode.vcf --missing-indv
+
+VCFtools - 0.1.14
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+        --vcf raw.g5mac3dp3.recode.vcf
+        --missing-indv
+
+After filtering, kept 40 out of 40 Individuals
+Outputting Individual Missingness
+After filtering, kept 99853 out of a possible 99853 Sites
+Run Time = 3.00 seconds
+
+[amali010@turing1 VCF]$ cat out.imiss
+INDV    N_DATA  N_GENOTYPES_FILTERED    N_MISS  F_MISS
+RI_W_06_merged  99853   0       67075   0.671737
+RI_W_07_merged  99853   0       63917   0.640111
+VA_B_03_merged  99853   0       56586   0.566693
+RI_W_02_merged  99853   0       73105   0.732126
+RI_W_04_merged  99853   0       71159   0.712638
+VA_W_09_SNP_clipped     99853   0       19459   0.194876
+RI_B_08_SNP_clipped     99853   0       88110   0.882397
+VA_W_08_SNP_clipped     99853   0       83344   0.834667
+VA_B_08_SNP_clipped     99853   0       94221   0.943597
+VA_W_02_merged  99853   0       71050   0.711546
+VA_B_07_merged  99853   0       62687   0.627793
+RI_B_05_merged  99853   0       43945   0.440097
+VA_W_06_merged  99853   0       65164   0.652599
+VA_W_04_merged  99853   0       50911   0.509859
+VA_W_01_merged  99853   0       67150   0.672489
+VA_B_10_SNP_clipped     99853   0       82831   0.829529
+VA_B_06_merged  99853   0       57724   0.57809
+VA_W_05_merged  99853   0       66297   0.663946
+RI_B_09_SNP_clipped     99853   0       85107   0.852323
+VA_W_10_SNP_clipped     99853   0       83234   0.833565
+RI_W_08_SNP_clipped     99853   0       77802   0.779165
+RI_B_06_merged  99853   0       79766   0.798834
+RI_W_10_SNP_clipped     99853   0       91323   0.914574
+RI_B_04_merged  99853   0       46717   0.467858
+VA_W_03_merged  99853   0       64016   0.641102
+RI_B_07_merged  99853   0       70798   0.709022
+RI_W_05_merged  99853   0       57117   0.572011
+RI_W_09_SNP_clipped     99853   0       88492   0.886223
+VA_B_01_merged  99853   0       47217   0.472865
+VA_B_09_SNP_clipped     99853   0       79187   0.793036
+RI_B_10_SNP_clipped     99853   0       82779   0.829009
+RI_W_01_merged  99853   0       73169   0.732767
+RI_B_01_merged  99853   0       69619   0.697215
+VA_B_04_merged  99853   0       58190   0.582757
+RI_B_02_merged  99853   0       87439   0.875677
+RI_W_03_merged  99853   0       38760   0.388171
+VA_B_02_merged  99853   0       78381   0.784964
+VA_W_07_merged  99853   0       64592   0.646871
+VA_B_05_merged  99853   0       54401   0.544811
+RI_B_03_merged  99853   0       80369   0.804873
+
+amali010@turing1 VCF]$ bash
+amali010@turing1:/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/VCF$ mawk '!/IN/' out.imiss | cut -f5 > totalmissing
+amali010@turing1:/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/VCF$ gnuplot << \EOF
+> set terminal dumb size 120, 30
+> set autoscale
+> unset label
+> set title "Histogram of % missing data per individual"
+> set ylabel "Number of Occurrences"
+> set xlabel "% of missing data"
+> #set yr [0:100000]
+> binwidth=0.01
+> bin(x,width)=width*floor(x/width) + binwidth/2.0
+> plot 'totalmissing' using (bin($1,binwidth)):(1.0) smooth freq with boxes
+> pause -1
+> EOF
+♀                                         Histogram of % missing data per individual
+  Number of Occurrences
+      3 ++----------+-----------+-----------+-----------+------------+---***-----+-----------+-----------+----------++
+        +           +           +           +           +       'totalmissing' using (bin($1,binwidth)):(1.0) ****** +
+        |                                                                * *                                         |
+        |                                                                * *                                         |
+        |                                                                * *                                         |
+        |                                                                * *                                         |
+    2.5 ++                                                               * *                                        ++
+        |                                                                * *                                         |
+        |                                                                * *                                         |
+        |                                                                * *                                         |
+        |                                                                * *                                         |
+        |                                                                * *                                         |
+      2 ++                                                       **      * * ***  ******    ** ****   ****          ++
+        |                                                        **      * * * *  * *  *    ** ** *   *  *           |
+        |                                                        **      * * * *  * *  *    ** ** *   *  *           |
+        |                                                        **      * * * *  * *  *    ** ** *   *  *           |
+        |                                                        **      * * * *  * *  *    ** ** *   *  *           |
+        |                                                        **      * * * *  * *  *    ** ** *   *  *           |
+    1.5 ++                                                       **      * * * *  * *  *    ** ** *   *  *          ++
+        |                                                        **      * * * *  * *  *    ** ** *   *  *           |
+        |                                                        **      * * * *  * *  *    ** ** *   *  *           |
+        |                                                        **      * * * *  * *  *    ** ** *   *  *           |
+        |                                                        **      * * * *  * *  *    ** ** *   *  *           |
+        +           +           +           +           +        **  +   * * * * +* *  *    ** ** *   *  *           +
+      1 *********************************************************************************************************---++
+       0.1         0.2         0.3         0.4         0.5          0.6         0.7         0.8         0.9          1
+                                                      % of missing data
+#9 - submit and add everything to your logfile
+git add README.md
+git commit -m 'updating readme'
+git push -u origin main
 ```
