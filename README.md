@@ -1525,3 +1525,249 @@ git add README.md
 git commit -m 'updating readme'
 git push -u origin main
 ```
+
+##Day 09 17-Feb-2021
+*  Exercise day09
+```sh
+#1 -  Run one of the following sets of prescribed filters on your mergedfastq_HEAAstrangiaAssembly_subset.vcf, note these are fairly conservative filters
+##Half the class run the following
+/cm/shared/apps/vcftools/0.1.12b/bin/vcftools --vcf mergedfastq_HEAAstrangiaAssembly_subset.vcf --maf 0.015 --max-alleles 2 --max-missing 0.5 --minQ 30 --minGQ 20 --minDP 3 --remove-indels --hwe 0.01 --recode --recode-INFO-all --out 18718_mergedfastq_HEAAstrangiaAssembly_subset_ClassFilters
+##the other half run the filters we used from the paper
+/cm/shared/apps/vcftools/0.1.12b/bin/vcftools --vcf mergedfastq_HEAAstrangiaAssembly_subset.vcf --max-missing 0.5 --mac 3 --minQ 30 --minDP 10 --max-alleles 2 --maf 0.015 --remove-indels --recode --recode-INFO-all --out 1578_mergedfastq_HEAAstrangiaAssembly_subset_HEAFilters
+
+#1a - Started a salloc session.
+[amali010@turing1 areej]$ salloc
+salloc: Pending job allocation 9280291
+salloc: job 9280291 queued and waiting for resources
+salloc: job 9280291 has been allocated resources
+salloc: Granted job allocation 9280291
+
+#1b - Navigated to my VCF directory.
+[amali010@coreV2-25-017 VCF]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/VCF
+
+#1c - Ran the following to make sure that the .vcf file is correct: /cm/shared/apps/vcftools/0.1.12b/bin/vcftools --vcf mergedfastq_HEAAstrangiaAssembly.vcf
+[amali010@coreV2-25-017 VCF]$ /cm/shared/apps/vcftools/0.1.12b/bin/vcftools --vcf mergedfastq_HEAAstrangiaAssembly.vcf
+
+VCFtools - v0.1.12b
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+        --vcf mergedfastq_HEAAstrangiaAssembly.vcf
+
+After filtering, kept 40 out of 40 Individuals
+After filtering, kept 1214003 out of a possible 1214003 Sites
+Run Time = 15.00 seconds
+
+#1d - Chosen to ran the second filter. Ran the following filter: /cm/shared/apps/vcftools/0.1.12b/bin/vcftools --vcf mergedfastq_HEAAstrangiaAssembly_subset.vcf --max-missing 0.5 --mac 3 --minQ 30 --minDP 10 --max-alleles 2 --maf 0.015 --remove-indels --recode --recode-INFO-all --out 1578_mergedfastq_HEAAstrangiaAssembly_subset_HEAFilters
+[amali010@coreV2-25-017 VCF]$ /cm/shared/apps/vcftools/0.1.12b/bin/vcftools --vcf mergedfastq_HEAAstrangiaAssembly_subset.vcf --max-missing 0.5 --mac 3 --minQ 30 --minDP 10 --max-alleles 2 --maf 0.015 --remove-indels --recode --recode-INFO-all --out 1578_mergedfastq_HEAAstrangiaAssembly_subset_HEAFilters
+
+VCFtools - v0.1.12b
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+        --vcf mergedfastq_HEAAstrangiaAssembly_subset.vcf
+        --recode-INFO-all
+        --mac 3
+        --maf 0.015
+        --max-alleles 2
+        --minDP 10
+        --minQ 30
+        --max-missing 0.5
+        --out 1578_mergedfastq_HEAAstrangiaAssembly_subset_HEAFilters
+        --recode
+        --remove-indels
+
+After filtering, kept 40 out of 40 Individuals
+Outputting VCF file...
+After filtering, kept 1578 out of a possible 432676 Sites
+Run Time = 8.00 seconds
+
+#2 - Make a population file containing two columns with no header, tab delimited text the first column should be the individual name and the second column the population to which that individual belongs
+#2a - Looked at missing individuals
+[amali010@coreV2-25-017 VCF]$ /cm/shared/apps/vcftools/0.1.12b/bin/vcftools --vcf 1578_mergedfastq_HEAAstrangiaAssembly_subset_HEAFilters.recode.vcf --missing-indv
+
+VCFtools - v0.1.12b
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+        --vcf 1578_mergedfastq_HEAAstrangiaAssembly_subset_HEAFilters.recode.vcf
+        --missing-indv
+
+After filtering, kept 40 out of 40 Individuals
+Outputting Individual Missingness
+After filtering, kept 1578 out of a possible 1578 Sites
+Run Time = 1.00 seconds
+
+[amali010@coreV2-25-017 VCF]$ less mergedfastq_HEAAstrangiaAssembly_subset.vcf
+[amali010@coreV2-25-017 VCF]$ grep '#CHROM' mergedfastq_HEAAstrangiaAssembly_subset.vcf
+#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  RI_W_06_merged      RI_W_07_merged  VA_B_03_merged  RI_W_02_merged  RI_W_04_merged  VA_W_09_SNP_clipped RI_B_08_SNP_clipped     VA_W_08_SNP_clipped     VA_B_08_SNP_clipped     VA_W_02_merged      VA_B_07_merged  RI_B_05_merged  VA_W_06_merged  VA_W_04_merged  VA_W_01_merged      VA_B_10_SNP_clipped     VA_B_06_merged  VA_W_05_merged  RI_B_09_SNP_clipped VA_W_10_SNP_clipped     RI_W_08_SNP_clipped     RI_B_06_merged  RI_W_10_SNP_clipped RI_B_04_merged  VA_W_03_merged  RI_B_07_merged  RI_W_05_merged  RI_W_09_SNP_clipped VA_B_01_merged  VA_B_09_SNP_clipped     RI_B_10_SNP_clipped     RI_W_01_merged      RI_B_01_merged  VA_B_04_merged  RI_B_02_merged  RI_W_03_merged  VA_B_02_merged      VA_W_07_merged  VA_B_05_merged  RI_B_03_merged
+[amali010@coreV2-25-017 VCF]$ grep '#CHROM' mergedfastq_HEAAstrangiaAssembly_subset.vcf > samplenames.text
+[amali010@coreV2-25-017 VCF]$ cat samplenames.text
+#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  RI_W_06_merged      RI_W_07_merged  VA_B_03_merged  RI_W_02_merged  RI_W_04_merged  VA_W_09_SNP_clipped RI_B_08_SNP_clipped     VA_W_08_SNP_clipped     VA_B_08_SNP_clipped     VA_W_02_merged      VA_B_07_merged  RI_B_05_merged  VA_W_06_merged  VA_W_04_merged  VA_W_01_merged      VA_B_10_SNP_clipped     VA_B_06_merged  VA_W_05_merged  RI_B_09_SNP_clipped VA_W_10_SNP_clipped     RI_W_08_SNP_clipped     RI_B_06_merged  RI_W_10_SNP_clipped RI_B_04_merged  VA_W_03_merged  RI_B_07_merged  RI_W_05_merged  RI_W_09_SNP_clipped VA_B_01_merged  VA_B_09_SNP_clipped     RI_B_10_SNP_clipped     RI_W_01_merged      RI_B_01_merged  VA_B_04_merged  RI_B_02_merged  RI_W_03_merged  VA_B_02_merged      VA_W_07_merged  VA_B_05_merged  RI_B_03_merged
+[amali010@coreV2-25-017 VCF]$ cat out.imiss
+INDV    N_DATA  N_GENOTYPES_FILTERED    N_MISS  F_MISS
+RI_W_06_merged  1578    0       316     0.200253
+RI_W_07_merged  1578    0       183     0.11597
+VA_B_03_merged  1578    0       79      0.0500634
+RI_W_02_merged  1578    0       442     0.280101
+RI_W_04_merged  1578    0       581     0.368188
+VA_W_09_SNP_clipped     1578    0       17      0.0107731
+RI_B_08_SNP_clipped     1578    0       1180    0.747782
+VA_W_08_SNP_clipped     1578    0       892     0.565272
+VA_B_08_SNP_clipped     1578    0       1273    0.806717
+VA_W_02_merged  1578    0       293     0.185678
+VA_B_07_merged  1578    0       116     0.0735108
+RI_B_05_merged  1578    0       57      0.0361217
+VA_W_06_merged  1578    0       164     0.103929
+VA_W_04_merged  1578    0       91      0.0576679
+VA_W_01_merged  1578    0       337     0.213561
+VA_B_10_SNP_clipped     1578    0       683     0.432826
+VA_B_06_merged  1578    0       82      0.0519645
+VA_W_05_merged  1578    0       187     0.118504
+RI_B_09_SNP_clipped     1578    0       1081    0.685044
+VA_W_10_SNP_clipped     1578    0       619     0.392269
+RI_W_08_SNP_clipped     1578    0       558     0.353612
+RI_B_06_merged  1578    0       613     0.388466
+RI_W_10_SNP_clipped     1578    0       1219    0.772497
+RI_B_04_merged  1578    0       107     0.0678074
+VA_W_03_merged  1578    0       197     0.124842
+RI_B_07_merged  1578    0       319     0.202155
+RI_W_05_merged  1578    0       79      0.0500634
+RI_W_09_SNP_clipped     1578    0       1159    0.734474
+VA_B_01_merged  1578    0       198     0.125475
+VA_B_09_SNP_clipped     1578    0       510     0.323194
+RI_B_10_SNP_clipped     1578    0       800     0.506971
+RI_W_01_merged  1578    0       499     0.316223
+RI_B_01_merged  1578    0       231     0.146388
+VA_B_04_merged  1578    0       139     0.0880862
+RI_B_02_merged  1578    0       1031    0.653359
+RI_W_03_merged  1578    0       109     0.0690748
+VA_B_02_merged  1578    0       597     0.378327
+VA_W_07_merged  1578    0       129     0.081749
+VA_B_05_merged  1578    0       54      0.0342205
+RI_B_03_merged  1578    0       762     0.48289
+[amali010@coreV2-25-017 VCF]$ cut -f 1 out.imiss | tail -n +2
+RI_W_06_merged
+RI_W_07_merged
+VA_B_03_merged
+RI_W_02_merged
+RI_W_04_merged
+VA_W_09_SNP_clipped
+RI_B_08_SNP_clipped
+VA_W_08_SNP_clipped
+VA_B_08_SNP_clipped
+VA_W_02_merged
+VA_B_07_merged
+RI_B_05_merged
+VA_W_06_merged
+VA_W_04_merged
+VA_W_01_merged
+VA_B_10_SNP_clipped
+VA_B_06_merged
+VA_W_05_merged
+RI_B_09_SNP_clipped
+VA_W_10_SNP_clipped
+RI_W_08_SNP_clipped
+RI_B_06_merged
+RI_W_10_SNP_clipped
+RI_B_04_merged
+VA_W_03_merged
+RI_B_07_merged
+RI_W_05_merged
+RI_W_09_SNP_clipped
+VA_B_01_merged
+VA_B_09_SNP_clipped
+RI_B_10_SNP_clipped
+RI_W_01_merged
+RI_B_01_merged
+VA_B_04_merged
+RI_B_02_merged
+RI_W_03_merged
+VA_B_02_merged
+VA_W_07_merged
+VA_B_05_merged
+RI_B_03_merged
+
+Used excel to make a second column with just the header
+
+RI_W_06_merged	RI_W
+RI_W_07_merged	RI_W
+VA_B_03_merged	VA_B
+RI_W_02_merged	RI_W
+RI_W_04_merged	RI_W
+VA_W_09_SNP_clipped	VA_W
+RI_B_08_SNP_clipped	RI_B
+VA_W_08_SNP_clipped	VA_W
+VA_B_08_SNP_clipped	VA_B
+VA_W_02_merged	VA_W
+VA_B_07_merged	VA_B
+RI_B_05_merged	RI_B
+VA_W_06_merged	VA_W
+VA_W_04_merged	VA_W
+VA_W_01_merged	VA_W
+VA_B_10_SNP_clipped	VA_B
+VA_B_06_merged	VA_B
+VA_W_05_merged	VA_W
+RI_B_09_SNP_clipped	RI_B
+VA_W_10_SNP_clipped	VA_W
+RI_W_08_SNP_clipped	RI_W
+RI_B_06_merged	RI_B
+RI_W_10_SNP_clipped	RI_W
+RI_B_04_merged	RI_B
+VA_W_03_merged	VA_W
+RI_B_07_merged	RI_B
+RI_W_05_merged	RI_W
+RI_W_09_SNP_clipped	RI_W
+VA_B_01_merged	VA_B
+VA_B_09_SNP_clipped	VA_B
+RI_B_10_SNP_clipped	RI_B
+RI_W_01_merged	RI_W
+RI_B_01_merged	RI_B
+VA_B_04_merged	VA_B
+RI_B_02_merged	RI_B
+RI_W_03_merged	RI_W
+VA_B_02_merged	VA_B
+VA_W_07_merged	VA_W
+VA_B_05_merged	VA_B
+RI_B_03_merged	RI_B
+
+[amali010@coreV2-25-017 VCF]$ nano popfile2.txt
+Pasted the two columns in this .txt file
+
+#3 - Convert your filtered .vcf file to genepop format using the following command:
+/cm/shared/courses/dbarshis/21AdvGenomics/scripts/vcftogenepop_advbioinf.py YOURFILTERED.vcf YOUR_PopFile.txt
+
+[amali010@coreV2-25-017 VCF]$ /cm/shared/courses/dbarshis/21AdvGenomics/scripts/vcftogenepop_advbioinf.py 1578_mergedfastq_HEAAstrangiaAssembly_subset_HEAFilters.recode.vcf popfile2.txt
+Indivs with genotypes in vcf file: RI_W_06_merged       RI_W_07_merged  VA_B_03_merged      RI_W_02_merged  RI_W_04_merged  VA_W_09_SNP_clipped     RI_B_08_SNP_clipped
+VA_W_08_SNP_clipped     VA_B_08_SNP_clipped     VA_W_02_merged  VA_B_07_merged  RI_B_05_merged      VA_W_06_merged  VA_W_04_merged  VA_W_01_merged  VA_B_10_SNP_clipped
+VA_B_06_merged  VA_W_05_merged  RI_B_09_SNP_clipped     VA_W_10_SNP_clipped     RI_W_08_SNP_clipped RI_B_06_merged  RI_W_10_SNP_clipped     RI_B_04_merged  VA_W_03_merged      RI_B_07_merged  RI_W_05_merged  RI_W_09_SNP_clipped     VA_B_01_merged  VA_B_09_SNP_clipped RI_B_10_SNP_clipped     RI_W_01_merged  RI_B_01_merged  VA_B_04_merged      RI_B_02_merged  RI_W_03_merged  VA_B_02_merged  VA_W_07_merged  VA_B_05_merged      RI_B_03_merged
+44 1578 1578 1578 1578 40
+
+[amali010@coreV2-25-017 VCF]$ ls
+Now I have a .gen file
+[amali010@coreV2-25-017 VCF]$ less 1578_mergedfastq_HEAAstrangiaAssembly_subset_HEAFilters.recode_genepop.gen
+Noticed that the contig name has now merged with SNPs
+
+#4 - SCP your YOURFILE_allfilters.recode_subset_genepop.gen file to your laptop
+[amali010@turing1 VCF]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/VCF
+
+areej@DESKTOP-RF6VF4N MINGW64 ~/Desktop/BIOL_803_Advanced_Genomics_Data_Analysis/In_class/21sp_advgenomics/assignments_exercises/day09 (master)
+$ pwd
+/c/Users/areej/Desktop/BIOL_803_Advanced_Genomics_Data_Analysis/In_class/21sp_advgenomics/assignments_exercises/day09
+
+areej@DESKTOP-RF6VF4N MINGW64 ~/Desktop/BIOL_803_Advanced_Genomics_Data_Analysis/In_class/21sp_advgenomics/assignments_exercises/day09 (master)
+$ scp amali010@turing.hpc.odu.edu:/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/VCF/1578_mergedfastq_HEAAstrangiaAssembly_subset_HEAFilters.recode_genepop.gen .
+amali010@turing.hpc.odu.edu's password:
+1578_mergedfastq_HEAAstrangiaAssembly_subset_HEAFi 100%  343KB   2.1MB/s   00:00
+
+areej@DESKTOP-RF6VF4N MINGW64 ~/Desktop/BIOL_803_Advanced_Genomics_Data_Analysis/In_class/21sp_advgenomics/assignments_exercises/day09 (master)
+$ ls
+1578_mergedfastq_HEAAstrangiaAssembly_subset_HEAFilters.recode_genepop.gen
+adegenet_PCAs.R
+adegenet_PCAs_HEAOutliers.R
+homework_day09.txt
+
+
+
