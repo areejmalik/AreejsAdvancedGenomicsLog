@@ -1520,7 +1520,7 @@ amali010@turing1:/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/
       1 *********************************************************************************************************---++
        0.1         0.2         0.3         0.4         0.5          0.6         0.7         0.8         0.9          1
                                                       % of missing data
-#9 - submit and add everything to your logfile
+#9 - Submit and add everything to your logfile
 git add README.md
 git commit -m 'updating readme'
 git push -u origin main
@@ -1906,7 +1906,97 @@ Output:
 > compoplot(a.clust)
 Gave us cluster diagram that showed the same thing where the majority are being assigned to the blue population with the exception of a few that are assigned to brown population.
 
-#6 - submit and add everything to your logfile
+#6 - Submit and add everything to your logfile
+git add README.md
+git commit -m 'updating readme'
+git push -u origin main
+```
+
+##Day 10 19-Feb-2021
+*  Exercise day10
+```sh
+#1 - Work through the adegenet_PCAs.R script and follow through the steps to produce some of the figures.
+I did this.
+
+#2 - cd into your SAMS folder containing your .sams and run the following as an sbatch script on your sam files to generate read mapping counts from each individual file:
+/cm/shared/courses/dbarshis/21AdvGenomics/scripts/countxpression_SB_advbioinf.py *.sam
+[amali010@turing1 SAMS]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/SAMS
+[amali010@turing1 SAMS]$ salloc
+salloc: Pending job allocation 9280964
+salloc: job 9280964 queued and waiting for resources
+salloc: job 9280964 has been allocated resources
+salloc: Granted job allocation 9280964
+[amali010@coreV1-22-016 SAMS]$ /cm/shared/courses/dbarshis/21AdvGenomics/scripts/countxpression_SB_advbioinf.py *.sam
+
+
+#3 - Once your job from step 1 is finished, start an salloc session and run the following on your outputted _counts.txt files:
+/cm/shared/courses/dbarshis/21AdvGenomics/scripts/ParseExpression2BigTable_advbioinf.py /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/host_genelist.txt YOURNAMEFullCounts_summed.txt NoMatch *_counts.txt
+[amali010@coreV1-22-016 SAMS]$ mv match_counts.txt match_countsoutput.txt
+[amali010@coreV1-22-016 SAMS]$ /cm/shared/courses/dbarshis/21AdvGenomics/scripts/ParseExpression2BigTable_advbioinf.py /cm/shared/courses/dbarshis/21AdvGenomics/classdata/Astrangia_poculata/host_genelist.txt AMFullCounts_summed.txt NoMatch *counts.txt
+Hits not matchedRI_B_06_18_clippedtrimmed.fastq_counts.txt=1698 RI_B_07_14_clippedtrimmed.fastq_counts.txt=1698     RI_B_07_18_clippedtrimmed.fastq_counts.txt=1698 RI_B_07_22_clippedtrimmed.fastq_counts.txt=1698     RI_W_06_18_clippedtrimmed.fastq_counts.txt=1698     RI_W_07_14_clippedtrimmed.fastq_counts.txt=1698 RI_W_07_18_clippedtrimmed.fastq_counts.txt=1698     RI_W_07_22_clippedtrimmed.fastq_counts.txt=1698 VA_B_06_18_clippedtrimmed.fastq_counts.txt=1698     VA_B_07_14_clippedtrimmed.fastq_counts.txt=1698     VA_B_07_18_clippedtrimmed.fastq_counts.txt=1698 VA_B_07_22_clippedtrimmed.fastq_counts.txt=1698     VA_W_06_18_clippedtrimmed.fastq_counts.txt=1698 VA_W_07_14_clippedtrimmed.fastq_counts.txt=1698     VA_W_07_18_clippedtrimmed.fastq_counts.txt=1698     VA_W_07_22_clippedtrimmed.fastq_counts.txt=1698
+[amali010@coreV1-22-016 SAMS]$ ls
+AMFullCounts_summed.txt
+match_countsoutput.txt
+RI_B_06_18_clippedtrimmed.fastq_counts.txt
+RI_B_06_18_clippedtrimmed.fastq.sam
+RI_B_07_14_clippedtrimmed.fastq_counts.txt
+RI_B_07_14_clippedtrimmed.fastq.sam
+RI_B_07_18_clippedtrimmed.fastq_counts.txt
+RI_B_07_18_clippedtrimmed.fastq.sam
+RI_B_07_22_clippedtrimmed.fastq_counts.txt
+RI_B_07_22_clippedtrimmed.fastq.sam
+RI_W_06_18_clippedtrimmed.fastq_counts.txt
+RI_W_06_18_clippedtrimmed.fastq.sam
+RI_W_07_14_clippedtrimmed.fastq_counts.txt
+RI_W_07_14_clippedtrimmed.fastq.sam
+RI_W_07_18_clippedtrimmed.fastq_counts.txt
+RI_W_07_18_clippedtrimmed.fastq.sam
+RI_W_07_22_clippedtrimmed.fastq_counts.txt
+RI_W_07_22_clippedtrimmed.fastq.sam
+VA_B_06_18_clippedtrimmed.fastq_counts.txt
+VA_B_06_18_clippedtrimmed.fastq.sam
+VA_B_07_14_clippedtrimmed.fastq_counts.txt
+VA_B_07_14_clippedtrimmed.fastq.sam
+VA_B_07_18_clippedtrimmed.fastq_counts.txt
+VA_B_07_18_clippedtrimmed.fastq.sam
+VA_B_07_22_clippedtrimmed.fastq_counts.txt
+VA_B_07_22_clippedtrimmed.fastq.sam
+VA_W_06_18_clippedtrimmed.fastq_counts.txt
+VA_W_06_18_clippedtrimmed.fastq.sam
+VA_W_07_14_clippedtrimmed.fastq_counts.txt
+VA_W_07_14_clippedtrimmed.fastq.sam
+VA_W_07_18_clippedtrimmed.fastq_counts.txt
+VA_W_07_18_clippedtrimmed.fastq.sam
+VA_W_07_22_clippedtrimmed.fastq_counts.txt
+VA_W_07_22_clippedtrimmed.fastq.sam
+
+#4 - scp YOURNAMEFullCounts_summed.txt to your laptop
+areej@DESKTOP-RF6VF4N MINGW64 ~/Desktop/BIOL_803_Advanced_Genomics_Data_Analysis/In_class/21sp_advgenomics/assignments_exercises/day10 (master)
+$ pwd
+/Users/areej/Desktop/BIOL_803_Advanced_Genomics_Data_Analysis/In_class/21sp_advgenomics/assignments_exercises/day10
+
+[amali010@coreV1-22-016 SAMS]$ pwd
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/SAMS
+[amali010@coreV1-22-016 SAMS]$ ls /cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/SAMS/AMFullCounts_summed.txt
+/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/SAMS/AMFullCounts_summed.txt
+
+areej@DESKTOP-RF6VF4N MINGW64 ~/Desktop/BIOL_803_Advanced_Genomics_Data_Analysis/In_class/21sp_advgenomics/assignments_exercises/day10 (master)
+$ scp amali010@turing.hpc.odu.edu:/cm/shared/courses/dbarshis/21AdvGenomics/sandboxes/areej/data/SAMS/AMFullCounts_summed.txt .
+amali010@turing.hpc.odu.edu's password:
+AMFullCounts_summed.txt                           100%  756KB   4.8MB/s   00:00
+
+areej@DESKTOP-RF6VF4N MINGW64 ~/Desktop/BIOL_803_Advanced_Genomics_Data_Analysis/In_class/21sp_advgenomics/assignments_exercises/day10 (master)
+$ ls
+AMFullCounts_summed.txt
+coral_279_cloneremoved_neutral.filtered1SNPper_genepop.gen
+coral_66_cloneremoved_highoutliers.filtered1SNPper_genepop.gen
+homework_day10.txt
+
+#5 - Edit the first line of YOURNAMEFullCounts_summed.txt to remove the _counts.txt_UniqueTotReads from each sample name to just retain the actual informative part of the sample name (e.g., RI_W_06_18)
+I did this in Notepad++ where I had to replace _clippedtrimmed.fastq_counts.txt_UniqueTotReads instead of just the _counts.txt_UniqueTotReads to retain the informative part of the sample names.
+
+#6 - Submit and add everything to your logfile
 git add README.md
 git commit -m 'updating readme'
 git push -u origin main
