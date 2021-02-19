@@ -1898,6 +1898,7 @@ Output:
 > table.value(a.tab, col.labels = 1:2)
 Gave us a table that shows out of your total populations which are the individuals from this population assigning too. 
 Most individuals are being assigned to blue populations with a few being assigned to brown population.
+
 Input:
 compoplot(a.clust)
 
