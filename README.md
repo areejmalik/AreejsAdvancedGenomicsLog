@@ -1769,5 +1769,144 @@ adegenet_PCAs.R
 adegenet_PCAs_HEAOutliers.R
 homework_day09.txt
 
+#5 - Switch to the adegenet_PCAs.R script and follow through the steps to produce some of the figures.
+Input:
+library("ape")
+library("pegas")
+library("seqinr")
+library("ggplot2")
+library("adegenet")
+setwd("/Users/areej/Desktop/BIOL_803_Advanced_Genomics_Data_Analysis/In_class/21sp_advgenomics/assignments_exercises/day09")
+datafile<-read.genepop('1578_mergedfastq_HEAAstrangiaAssembly_subset_HEAFilters.recode_genepop.gen', ncode=2)
+sum(is.na(datafile$tab))
+datafile #shows info
+
+Output:
+> library("ape")
+> library("pegas")
+> library("seqinr")
+> library("ggplot2")
+> library("adegenet")
+> setwd("/Users/areej/Desktop/BIOL_803_Advanced_Genomics_Data_Analysis/In_class/21sp_advgenomics/assignments_exercises/day09")
+> datafile<-read.genepop('1578_mergedfastq_HEAAstrangiaAssembly_subset_HEAFilters.recode_genepop.gen', ncode=2)
+
+ Converting data from a Genepop .gen file to a genind object... 
 
 
+File description:  AllSNPs 
+
+...done.
+
+> sum(is.na(datafile$tab))
+[1] 35966
+> datafile #shows info
+/// GENIND OBJECT /////////
+
+ // 40 individuals; 1,578 loci; 3,156 alleles; size: 1.4 Mb
+
+ // Basic content
+   @tab:  40 x 3156 matrix of allele counts
+   @loc.n.all: number of alleles per locus (range: 2-2)
+   @loc.fac: locus factor for the 3156 columns of @tab
+   @all.names: list of allele names for each locus
+   @ploidy: ploidy of each individual  (range: 2-2)
+   @type:  codom
+   @call: read.genepop(file = "1578_mergedfastq_HEAAstrangiaAssembly_subset_HEAFilters.recode_genepop.gen", 
+    ncode = 2)
+
+ // Optional content
+   @pop: population of each individual (group size range: 10-10)
+
+Input:
+YOURdata<-scaleGen(datafile, NA.method='mean')
+X<-YOURdata
+substring(pop(datafile),1,4)
+Y<-as.factor(substring(pop(datafile),1,4))
+pca1 <- dudi.pca(X,cent=F, scale=F, scannf=F, nf=3)
+
+Output:
+> YOURdata<-scaleGen(datafile, NA.method='mean')
+Warning message:
+In .local(x, ...) : Some scaling values are null.
+ Corresponding alleles are removed.
+> X<-YOURdata
+> substring(pop(datafile),1,4)
+ [1] "RI_B" "RI_B" "RI_B" "RI_B" "RI_B" "RI_B" "RI_B" "RI_B" "RI_B"
+[10] "RI_B" "VA_W" "VA_W" "VA_W" "VA_W" "VA_W" "VA_W" "VA_W" "VA_W"
+[19] "VA_W" "VA_W" "VA_B" "VA_B" "VA_B" "VA_B" "VA_B" "VA_B" "VA_B"
+[28] "VA_B" "VA_B" "VA_B" "RI_W" "RI_W" "RI_W" "RI_W" "RI_W" "RI_W"
+[37] "RI_W" "RI_W" "RI_W" "RI_W"
+> Y<-as.factor(substring(pop(datafile),1,4))
+> pca1 <- dudi.pca(X,cent=F, scale=F, scannf=F, nf=3)
+
+Input:
+#### PCAs ####
+# individual labels
+s.label(pca1$li)
+
+Output:
+#### PCAs ####
+> # individual labels
+> s.label(pca1$li)
+Plotted each sample name as a point
+
+Input:
+# population elipses
+s.class(pca1$li, pop(datafile))
+
+Output:
+> # population elipses
+> s.class(pca1$li, pop(datafile))
+Plotted population
+
+Input:
+#color symbols, pop names
+#pdf("YOURINITIALS_ColorPCA1v2.pdf")
+col <- c("blue","red", "green", "black")
+s.class(pca1$li, Y,xax=1,yax=2, col=transp(col,.6), axesell=F, cstar=0, cpoint=3, grid=FALSE, addaxes=TRUE)
+add.scatter.eig(pca1$eig[1:3], 3,1,2, posi="topright")
+title("PCA of DJB_data\naxes 1-2")
+
+Output: 
+> #color symbols, pop names
+> #pdf("YOURINITIALS_ColorPCA1v2.pdf")
+> col <- c("blue","red", "green", "black")
+> s.class(pca1$li, Y,xax=1,yax=2, col=transp(col,.6), axesell=F, cstar=0, cpoint=3, grid=FALSE, addaxes=TRUE)
+> add.scatter.eig(pca1$eig[1:3], 3,1,2, posi="topright")
+> title("PCA of DJB_data\naxes 1-2")
+Plotted population with color
+Points are individuals with elipses around the populations
+Not as many outliers as the other .gen file
+
+Input:
+#### Snapclust ####
+a.clust<-snapclust(datafile, k = 2)
+class(a.clust)
+names(a.clust)
+a.tab <- table(pop(datafile), a.clust$group)
+table.value(a.tab, col.labels = 1:2)
+
+Output:
+> #### Snapclust ####
+> a.clust<-snapclust(datafile, k = 2)
+> class(a.clust)
+[1] "snapclust" "list"     
+> names(a.clust)
+[1] "group"     "ll"        "proba"     "converged" "n.iter"   
+[6] "n.param"  
+> a.tab <- table(pop(datafile), a.clust$group)
+> table.value(a.tab, col.labels = 1:2)
+Gave us a table that shows out of your total populations which are the individuals from this population assigning too. 
+Most individuals are being assigned to blue populations with a few being assigned to brown population.
+Input:
+compoplot(a.clust)
+
+Output:
+> compoplot(a.clust)
+Gave us cluster diagram that showed the same thing where the majority are being assigned to the blue population with the exception of a few that are assigned to brown population.
+
+#6 - submit and add everything to your logfile
+git add README.md
+git commit -m 'updating readme'
+git push -u origin main
+```
