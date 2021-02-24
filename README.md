@@ -2001,3 +2001,12 @@ git add README.md
 git commit -m 'updating readme'
 git push -u origin main
 ```
+
+##Day 11 24-Feb-2021
+*  Exercise day11
+```sh
+#1 - Download the DESeq2Script_advbioinf.R script and work through on the shared djbFullCounts_summed.txt file
+Did this during class
+```
+
+
